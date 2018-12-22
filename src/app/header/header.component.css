@@ -14,3 +14,25 @@
 .navbar {
   min-height: 75px;
 }
+
+.navbar-brand {
+  font-family: Pecita, serif;
+  font-size: 2.5em
+}
+
+.nav-link {
+  font-size: 17px;
+  transform: scale(1);
+  transition: all 50ms ease-in;
+}
+
+.nav-link:hover {
+  font-size: 17px;
+  transform: scale(1.3);
+  transition: all 50ms ease-in;
+}
+
+@font-face { font-family: Relaxing_Blaze; src: url('/assets/Vtks Relaxing Blaze.ttf'); }
+@font-face { font-family: Pecita; src: url('/assets/Pecita.otf'); }
+@font-face { font-family: Amaranth; src: url('/assets/Amaranth-Bold.ttf'); }
+@font-face { font-family: Amaranth-regular; src: url('/assets/Amaranth-Regular.ttf'); }
