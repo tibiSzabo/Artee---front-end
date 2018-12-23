@@ -4,8 +4,11 @@ import { ArticleListComponent } from './articles/article-list/article-list.compo
 import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
 
 const routes: Routes = [
-  { path: '', component: ArticleListComponent },
-  { path: 'articles/:id', component: ArticleDetailComponent },
+  { path: '', redirectTo: '/articles', pathMatch: 'full' },
+  { path: 'article/:id', component: ArticleDetailComponent },
+  { path: 'articles', component: ArticleListComponent },
+  { path: 'articles/:id', component: ArticleListComponent }
+
   // { path: 'admin', component: AdminComponent }
 ];
 
