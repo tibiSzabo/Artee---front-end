@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ArticleListComponent } from './articles/article-list/article-list.component';
+import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
+import { ArticleService } from './shared/article.service';
 
 
 @NgModule({
@@ -14,14 +16,15 @@ import { ArticleListComponent } from './articles/article-list/article-list.compo
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

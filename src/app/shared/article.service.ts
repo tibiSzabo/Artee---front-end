@@ -1,0 +1,32 @@
+import { Article } from '../articles/article.model';
+
+export class ArticleService {
+  private articles: Article [] = [
+    new Article('Lorem', 'https://c.pxhere.com/images/b0/cb/aebdee4fcbddbfa3c7552877aeb2-1450307.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/15/62/maple_tree_autumn_leaves_foliage_colorful_woods_maple_fall-809032.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/98/d2/autumn_autumn_leaves_color_daylight_environment_fall_fallen_leaves_forest-984199.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/02/44/forest_autumn_fall_nature_tree_season_foliage_yellow-1332076.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/fa/af/tree_foliage_forest_woods_nature_autumn_fall_perspective-779877.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/0f/b5/leaves_trees_nature_autumn_fall_forest_season_natural-1349570.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+    new Article('Lorem', 'https://c.pxhere.com/photos/da/e8/tree_leaves_maple_autumn_fall_red_woods_forest-1017374.jpg!d',
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Date(2018, 5, 15)),
+
+  ]
+
+  getArticles() {
+    return this.articles.slice();
+  }
+}
