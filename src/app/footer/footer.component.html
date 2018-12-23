@@ -1,0 +1,31 @@
+<footer class="bg-dark footer">
+  <div class="container bg-dark" >
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Newsletter:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+          <button class="btn btn-outline-light btn-sm mt-2">Subscribe</button>
+        </div>
+      </div>
+
+      <div class="col-sm text-center pt-3">
+        <a href="#"><span style="font-size: 2.5em"><i class="fab fa-facebook"></i></span></a>
+        <a href="#"><span style="font-size: 2.5em"><i class="fab fa-twitter"></i></span></a>
+        <a href="#"><span style="font-size: 2.5em"><i class="fab fa-google-plus-g"></i></span></a>
+      </div>
+
+      <div id="menu" class="col-sm text-center pt-3">
+
+          <p
+            class=" py-4"
+            *ngFor="let menuPoint of footerMenu"><a href="#">{{ menuPoint }}</a></p>
+
+      </div>
+
+    </div>
+
+  </div>
+</footer>

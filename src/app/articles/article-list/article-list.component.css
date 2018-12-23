@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+img {
+  max-height: 230px;
+  object-fit: cover;
+  object-position: 50% 80%;
+}
+
+.card-container {
+  margin: 15px 15px;
+}
+
+.card {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  cursor: pointer;
+
+  transform: scale(1);
+  transition: 300ms ease-in;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: 300ms ease-in;
+}
+
+li {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  transition: all 150ms ease-in;
+}
+
+li:hover {
+  transition: all 150ms ease-in;
+}
+
