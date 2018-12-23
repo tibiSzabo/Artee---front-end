@@ -10,6 +10,7 @@ import { routeFadeStateTrigger } from '../../shared/route-animations';
   styleUrls: ['./article-detail.component.css'],
   animations: [routeFadeStateTrigger]
 })
+
 export class ArticleDetailComponent implements OnInit, AfterViewInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
   article: Article;
@@ -22,7 +23,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    window.scrollTo(0, 450);
+    window.scrollTo(0, 250);
   }
 
   onBack() {
