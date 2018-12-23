@@ -31,5 +31,10 @@ li {
   -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
   -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
   box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  transition: all 150ms ease-in;
+}
+
+li:hover {
+  transition: all 150ms ease-in;
 }
 
