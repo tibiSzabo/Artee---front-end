@@ -38,3 +38,15 @@ li:hover {
   transition: all 150ms ease-in;
 }
 
+.disabled>a.page-link {
+  font-weight: bolder;
+  background-color: lightgray;
+}
+
+a.page-link:hover {
+  transition: background-color 150ms ease-in;
+}
+
+a.page-link {
+  transition: background-color 150ms ease-in;
+}
