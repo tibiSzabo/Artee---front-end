@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.addDummyCategories();
-    console.log(this.categories);
   }
 
   addDummyCategories() {

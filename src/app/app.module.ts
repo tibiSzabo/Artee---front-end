@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ArticleListComponent } from './articles/article-list/article-list.component';
 import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
 import { ArticleService } from './shared/article.service';
+import { ArticlesComponent } from './articles/articles.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ArticleService } from './shared/article.service';
     HeaderComponent,
     FooterComponent,
     ArticleListComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,

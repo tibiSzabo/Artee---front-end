@@ -1,7 +1,10 @@
+:host {
+  display: block;
+}
+
 img {
   max-height: 230px;
   object-fit: cover;
-  /*object-position: 50% 80%;*/
   object-position: 50% 80%;
 }
 
