@@ -1,7 +1,6 @@
 .header {
   max-height: 300px;
   overflow: hidden;
-  margin:0;
 }
 
 .header-img {
@@ -30,6 +29,18 @@
   font-size: 17px;
   transform: scale(1.15);
   transition: all 50ms ease-in;
+}
+
+.fa-search {
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 50ms;
+
+}
+
+.fa-search:hover {
+  transform: scale(1.15);
+  transition: all 50ms;
 }
 
 @font-face { font-family: Relaxing_Blaze; src: url('/assets/Vtks Relaxing Blaze.ttf'); }

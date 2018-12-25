@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
-import { fadeTrigger, headerImageTrigger } from '../shared/animations';
+import { headerImageTrigger } from '../shared/animations';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,9 @@ import { fadeTrigger, headerImageTrigger } from '../shared/animations';
 export class HeaderComponent implements OnInit {
   categories: Category[] = [];
   displayedHeaderImage = '/assets/header_default.jpg';
+  filterText = '';
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -26,4 +28,13 @@ export class HeaderComponent implements OnInit {
     this.categories.push(new Category('Category 3', '/assets/header3.jpg'));
   }
 
+  onKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
+    }
+  }
+
+  submitSearch() {
+    this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
+  }
 }
