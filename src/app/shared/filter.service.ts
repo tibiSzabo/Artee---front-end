@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 export class FilterService {
   public filterText: string;
   public filterChangedSubject = new Subject<string>();
+  public searchMode = new Subject<boolean>();
+
 
   constructor() { }
 
@@ -15,4 +17,11 @@ export class FilterService {
     this.filterChangedSubject.next(this.filterText);
   }
 
+  enterSearchMode() {
+    this.searchMode.next(true);
+  }
+
+  leaveSearchMode() {
+    this.searchMode.next(false);
+  }
 }

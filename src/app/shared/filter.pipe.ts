@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform {
 
 
     return items.filter( str => {
-      return str[field].toLowerCase().includes(value.toLowerCase());
+      return str[field].toLowerCase().includes(value.toLowerCase().trim());
     });
   }
 

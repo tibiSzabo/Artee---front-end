@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
 import { headerImageTrigger } from '../shared/animations';
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   displayedHeaderImage = '/assets/header_default.jpg';
   filterText = '';
 
-  constructor(private filterService: FilterService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -28,7 +29,13 @@ export class HeaderComponent implements OnInit {
     this.categories.push(new Category('Category 3', '/assets/header3.jpg'));
   }
 
-  onChange() {
-    this.filterService.updateFilterText(this.filterText);
+  onKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
+    }
+  }
+
+  submitSearch() {
+    this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
   }
 }

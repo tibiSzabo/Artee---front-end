@@ -6,12 +6,13 @@ import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { ScrollService } from '../../shared/scroll.service';
 import { FilterService } from '../../shared/filter.service';
 import { Subscription } from 'rxjs';
+import { fadeTrigger } from '../../shared/animations';
 
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
-  animations: [routeFadeStateTrigger]
+  animations: [routeFadeStateTrigger, fadeTrigger]
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -22,7 +23,9 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   pages: number [];
   currentPage: number;
   filterSubscription: Subscription;
-  filterText: string;
+  searchModeSubscription: Subscription;
+  filterText: string = '';
+  searchMode: boolean = false;
 
 
 
@@ -38,9 +41,15 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.articlesToDisplay = this.articles.slice((this.currentPage-1) * 10, this.currentPage*10);
 
-    this.filterSubscription = this.filterService.filterChangedSubject.subscribe(
-      data => this.filterText = data
-    );
+    this.route.queryParams.subscribe(params => {
+      if (params['key']) {
+        this.filterText = params['key'];
+      }
+      if (this.filterText.trim() != '') {
+        this.searchMode = true;
+      }
+    });
+
     this.pages = this.getPages();
   }
 
@@ -49,7 +58,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.filterSubscription.unsubscribe();
   }
 
   onSelectArticle(id: number) {

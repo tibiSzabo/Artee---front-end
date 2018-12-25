@@ -22,7 +22,7 @@ import { FilterPipe } from './shared/filter.pipe';
     ArticleListComponent,
     ArticleDetailComponent,
     ArticlesComponent,
-    FilterPipe
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
