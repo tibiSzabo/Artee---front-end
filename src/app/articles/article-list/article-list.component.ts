@@ -44,6 +44,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (this.filterText.trim() != '') {
         this.searchMode = true;
+        window.scrollTo(0, 0);
       }
     });
 

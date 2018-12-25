@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
+import { Category } from '../../shared/category.model';
 
 @Component({
   selector: 'app-article-detail',
@@ -19,7 +20,8 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit {
 
   constructor(private articleService: ArticleService,
               private activeRoute: ActivatedRoute,
-              private location: Location) { }
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit() {
     const articleId = this.activeRoute.snapshot.params['id'];
@@ -32,5 +34,9 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit {
 
   onBack() {
     this.location.back();
+  }
+
+  onCategoryClicked(category: Category) {
+    this.router.navigate(['articles'], { queryParams: { searchBy: 'category', key: category.name } });
   }
 }

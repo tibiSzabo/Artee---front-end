@@ -7,7 +7,7 @@
         <p class="card-text"> {{ article.description }} </p>
         <p class="card-text"><small class="text-muted">
           <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
-          <i class="fas fa-tags ml-4 mr-1"></i> <a href="#">{{ article.category.name }}</a></small></p>
+          <i class="fas fa-tags ml-4 mr-1"></i> <a (click)="onCategoryClicked(article.category)">{{ article.category.name }}</a></small></p>
         <p class="card-text"><span class="back" (click)="onBack()"><small class="text-muted"><i class="fas fa-arrow-left mr-1"></i> Back </small></span></p>
       </div>
     </div>
