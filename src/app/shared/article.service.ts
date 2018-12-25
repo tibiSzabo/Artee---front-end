@@ -1,6 +1,7 @@
 import { Article } from '../articles/article.model';
 import { Injectable } from '@angular/core';
 import { Category } from './category.model';
+import { CategoryService } from './category.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class ArticleService {
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
-      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Category('Category 1', ''), new Date(2018, 5, 15)),
+      ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', this.categoryService.getCategory('Category 1'), new Date(2018, 5, 15)),
     new Article(2,'Lorem', 'https://c.pxhere.com/photos/15/62/maple_tree_autumn_leaves_foliage_colorful_woods_maple_fall-809032.jpg!d',
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Category('Category 2', ''), new Date(2018, 5, 15)),
@@ -72,9 +73,9 @@ export class ArticleService {
     new Article(7,'Lorem', 'https://c.pxhere.com/photos/da/e8/tree_leaves_maple_autumn_fall_red_woods_forest-1017374.jpg!d',
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       ' penatibus et magnis dis parturient montes, nascetur ridiculus mus. ', new Category('Category 1', ''), new Date(2018, 5, 15))
-
-
   ];
+
+  constructor(private categoryService: CategoryService) { }
 
   getArticles() {
     return this.articles.slice();

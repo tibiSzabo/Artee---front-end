@@ -14,9 +14,10 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item"
-          *ngFor="let category of categories; let i = index"
-          (mouseenter)="displayedHeaderImage = category.image">
-        <a class="nav-link" href="#">{{ category.name }}</a>
+          *ngFor="let category of categories"
+          (mouseenter)="displayedHeaderImage = category.image"
+          (click)="onCategoryClicked(category)">
+        <a class="nav-link">{{ category.name }}</a>
       </li>
 
     </ul>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
 import { headerImageTrigger } from '../shared/animations';
+import { CategoryService } from '../shared/category.service';
 
 @Component({
   selector: 'app-header',
@@ -15,26 +16,26 @@ export class HeaderComponent implements OnInit {
   displayedHeaderImage = '/assets/header_default.jpg';
   filterText = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private categoryService: CategoryService) {
   }
 
   ngOnInit() {
-    this.addDummyCategories();
-  }
-
-  addDummyCategories() {
-    this.categories.push(new Category('Category 1', '/assets/header1.jpg'));
-    this.categories.push(new Category('Category 2', '/assets/header2.jpg'));
-    this.categories.push(new Category('Category 3', '/assets/header3.jpg'));
+    this.categories = this.categoryService.getCategories();
+    console.log(this.categoryService.getCategory('Category 1'));
   }
 
   onKeyDown(event) {
     if (event.key === 'Enter') {
-      this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
+      this.router.navigate(['articles'], { queryParams: { searchBy: 'title', key: this.filterText } });
     }
   }
 
   submitSearch() {
-    this.router.navigate(['articles'], { queryParams: { key: this.filterText } });
+    this.router.navigate(['articles'], { queryParams: { searchBy: 'title', key: this.filterText } });
+  }
+
+  onCategoryClicked(category: Category) {
+    this.router.navigate(['articles'], { queryParams: { searchBy: 'category', key: category.name } });
   }
 }
