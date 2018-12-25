@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { Category } from '../shared/category.model';
-import { fadeTrigger, headerImageTrigger } from '../shared/animations';
+import { headerImageTrigger } from '../shared/animations';
+import { FilterService } from '../shared/filter.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,9 @@ import { fadeTrigger, headerImageTrigger } from '../shared/animations';
 export class HeaderComponent implements OnInit {
   categories: Category[] = [];
   displayedHeaderImage = '/assets/header_default.jpg';
+  filterText = '';
 
-  constructor() {
+  constructor(private filterService: FilterService) {
   }
 
   ngOnInit() {
@@ -26,4 +28,7 @@ export class HeaderComponent implements OnInit {
     this.categories.push(new Category('Category 3', '/assets/header3.jpg'));
   }
 
+  onChange() {
+    this.filterService.updateFilterText(this.filterText);
+  }
 }

@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { ScrollService } from '../../shared/scroll.service';
+import { FilterService } from '../../shared/filter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-article-list',
@@ -11,29 +13,43 @@ import { ScrollService } from '../../shared/scroll.service';
   styleUrls: ['./article-list.component.css'],
   animations: [routeFadeStateTrigger]
 })
-export class ArticleListComponent implements OnInit, AfterViewInit {
+export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostBinding('@routeFadeState') routeAnimation = true;
   articles: Article [];
+  articlesToDisplay: Article [];
   selectedArticleId: number;
   pages: number [];
   currentPage: number;
+  filterSubscription: Subscription;
+  filterText: string;
+
 
 
   constructor(private articleService: ArticleService,
               private router: Router,
               private scroller: ScrollService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private filterService: FilterService) { }
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
-    this.pages = this.getPages();
     this.currentPage = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : 1;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.articlesToDisplay = this.articles.slice((this.currentPage-1) * 10, this.currentPage*10);
+
+    this.filterSubscription = this.filterService.filterChangedSubject.subscribe(
+      data => this.filterText = data
+    );
+    this.pages = this.getPages();
   }
 
   ngAfterViewInit(): void {
     window.scrollTo(this.scroller.X, this.scroller.Y);
+  }
+
+  ngOnDestroy(): void {
+    this.filterSubscription.unsubscribe();
   }
 
   onSelectArticle(id: number) {
@@ -59,6 +75,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit {
   }
 
   onSelectPage(page: number) {
-    this.router.navigate(['articles', + page])
+    this.router.navigate(['articles', + page]);
   }
 }

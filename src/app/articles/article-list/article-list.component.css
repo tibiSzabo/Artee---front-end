@@ -40,7 +40,7 @@ li:hover {
 
 .disabled>a.page-link {
   font-weight: bolder;
-  background-color: lightgray;
+  opacity: 0.6;
 }
 
 a.page-link:hover {

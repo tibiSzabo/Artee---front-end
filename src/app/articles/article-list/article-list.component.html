@@ -9,7 +9,7 @@
   </nav>
 
   <div class="row">
-    <div class="card-container" *ngFor="let article of articles.slice((currentPage-1) * 10, currentPage*10)" (click)="onSelectArticle(article.id)">
+    <div class="card-container" *ngFor="let article of articlesToDisplay | filter:'title':filterText" (click)="onSelectArticle(article.id)">
       <div class="card mb-3">
         <img class="card-img-top" [src]="article.image" alt="Card image cap">
         <div class="card-body">
@@ -20,8 +20,8 @@
             <i class="fas fa-tags ml-4 mr-1"></i> {{ article.category.name }} </small></p>
         </div>
       </div>
-    </div>
   </div>
+</div>
 
   <nav aria-label="...">
     <ul class="pagination pagination-lg">

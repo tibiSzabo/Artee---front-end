@@ -23,12 +23,11 @@
 
     <form class="form-inline my-2 my-lg-2 pull-right">
       <i class="fas fa-search pr-3" style="font-size: 1.5em; color: white"></i>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input name="asd" class="form-control mr-sm-2" placeholder="Search" [(ngModel)]="filterText" (keyup)="onChange()">
     </form>
 
     <button class="btn btn-outline-light ml-5" style="border: transparent">Sign In</button>
     <button class="btn btn-outline-light ml-1" style="border: transparent">Log In</button>
-
 
   </div>
 </nav>
