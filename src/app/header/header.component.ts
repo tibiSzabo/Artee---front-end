@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
 import { headerImageTrigger } from '../shared/animations';
-import { FilterService } from '../shared/filter.service';
 
 @Component({
   selector: 'app-header',

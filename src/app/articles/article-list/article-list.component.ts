@@ -1,11 +1,9 @@
-import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { ScrollService } from '../../shared/scroll.service';
-import { FilterService } from '../../shared/filter.service';
-import { Subscription } from 'rxjs';
 import { fadeTrigger } from '../../shared/animations';
 
 @Component({
@@ -22,8 +20,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedArticleId: number;
   pages: number [];
   currentPage: number;
-  filterSubscription: Subscription;
-  searchModeSubscription: Subscription;
   filterText: string = '';
   searchMode: boolean = false;
 
@@ -32,8 +28,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private articleService: ArticleService,
               private router: Router,
               private scroller: ScrollService,
-              private route: ActivatedRoute,
-              private filterService: FilterService) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
