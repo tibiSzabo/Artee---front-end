@@ -10,10 +10,15 @@ export class FilterPipe implements PipeTransform {
     if(!items) return [];
     if(!value || value.trim().length == 0) return items;
 
-
-    return items.filter( str => {
-      return str[field].toLowerCase().includes(value.toLowerCase().trim());
-    });
+    if (field == 'title') {
+      return items.filter( str => {
+        return str[field].toLowerCase().includes(value.toLowerCase().trim());
+      });
+    } else {
+      return items.filter( str => {
+        return str.category.name.toLowerCase().includes(value.toLowerCase().trim());
+      });
+    }
   }
 
 }

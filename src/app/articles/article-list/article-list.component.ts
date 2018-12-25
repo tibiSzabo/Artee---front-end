@@ -21,31 +21,32 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   pages: number [];
   currentPage: number;
   filterText: string = '';
+  filterBy: string = 'title';
   searchMode: boolean = false;
-
-
 
   constructor(private articleService: ArticleService,
               private router: Router,
               private scroller: ScrollService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
     this.currentPage = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : 1;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.articlesToDisplay = this.articles.slice((this.currentPage-1) * 10, this.currentPage*10);
+    this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+    this.pages = this.getPages();
 
     this.route.queryParams.subscribe(params => {
-      if (params['key']) {
+      if (params['key'] && params['searchBy']) {
         this.filterText = params['key'];
+        this.filterBy = params['searchBy'];
       }
       if (this.filterText.trim() != '') {
         this.searchMode = true;
       }
     });
 
-    this.pages = this.getPages();
   }
 
   ngAfterViewInit(): void {
@@ -57,7 +58,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSelectArticle(id: number) {
     this.selectedArticleId = id;
-    this.router.navigate(['article', id-1]);
+    this.router.navigate(['article', id - 1]);
     this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
   }
 
@@ -78,6 +79,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSelectPage(page: number) {
-    this.router.navigate(['articles', + page]);
+    this.router.navigate(['articles', +page]);
   }
 }
