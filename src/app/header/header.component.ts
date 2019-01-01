@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
-    console.log(this.categoryService.getCategory('Category 1'));
   }
 
   onKeyDown(event) {

@@ -14,7 +14,7 @@ import { fadeTrigger } from '../../shared/animations';
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @HostBinding('@routeFadeState') routeAnimation = true;
+  // @HostBinding('@routeFadeState') routeAnimation = true;
   articles: Article [];
   articlesToDisplay: Article [];
   selectedArticleId: number;

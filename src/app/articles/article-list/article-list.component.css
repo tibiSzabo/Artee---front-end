@@ -50,3 +50,8 @@ a.page-link:hover {
 a.page-link {
   transition: background-color 150ms ease-in;
 }
+
+.no-search-result>p {
+  font-size: 1.5em;
+  font-family: Amaranth-regular, serif;
+}

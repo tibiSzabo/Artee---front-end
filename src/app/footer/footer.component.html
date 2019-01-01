@@ -1,12 +1,13 @@
 <footer class="bg-dark footer">
-  <div class="container bg-dark" >
+  <div class="container bg-dark">
 
     <div class="row">
 
       <div class="col">
         <div class="form-group">
           <label for="exampleInputEmail1">Newsletter:</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                 placeholder="Email">
           <button class="btn btn-outline-light btn-sm mt-2">Subscribe</button>
         </div>
       </div>
@@ -19,9 +20,10 @@
 
       <div id="menu" class="col-sm text-center pt-3">
 
-          <p
-            class=" py-4"
-            *ngFor="let menuPoint of footerMenu"><a href="#">{{ menuPoint }}</a></p>
+        <p class="py-4"><a routerLink="/">Home</a></p>
+        <p class="py-4"><a href="#">Contact</a></p>
+        <p class="py-4"><a href="#">Privacy</a></p>
+        <p class="py-4"><a href="#">Terms</a></p>
 
       </div>
 

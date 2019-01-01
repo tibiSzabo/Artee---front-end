@@ -1,6 +1,6 @@
-<div class="container my-5">
+<div class="container my-5" @fadeState>
 
-  <div class="non-search-mode" *ngIf="!searchMode" @fadeState>
+  <div *ngIf="!searchMode">
     <nav aria-label="...">
       <ul class="pagination pagination-lg">
         <li class="page-item" routerLinkActive="disabled" [ngClass]="{'disabled': currentPage === page}" *ngFor="let page of pages">
@@ -56,4 +56,6 @@
 
 </div>
 
-
+<div class="container" @fadeState>
+  <div class="no-search-result" *ngIf="!articles | filter:filterBy:filterText"> <p>No search result for: {{ filterText }}</p> </div>
+</div>
