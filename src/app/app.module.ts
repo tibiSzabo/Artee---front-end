@@ -17,8 +17,9 @@ import { FilterPipe } from './shared/filter.pipe';
 import { PageNotFound } from './pagenotfound/pagenotfound';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.component';
+import { NewArticleComponent } from './admin-page/new-article/new-article.component';
+import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
 
 
 
@@ -33,8 +34,9 @@ import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.
     FilterPipe,
     PageNotFound,
     AdminPageComponent,
-    NewArticleComponent,
     EditArticlesComponent,
+    NewArticleComponent,
+    ListArticlesComponent
   ],
   imports: [
     BrowserModule,

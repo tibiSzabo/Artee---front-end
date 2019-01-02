@@ -5,6 +5,7 @@ import { ArticleListComponent } from './articles/article-list/article-list.compo
 import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
 import { PageNotFound } from './pagenotfound/pagenotfound';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'articles', component: ArticleListComponent },
   { path: 'articles/:id', component: ArticleListComponent },
   { path: 'admin', component: AdminPageComponent },
+  { path: 'admin/add', component: NewArticleComponent },
   { path: '**', component: PageNotFound }
 ];
 

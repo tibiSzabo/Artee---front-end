@@ -20,9 +20,9 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedArticleId: number;
   pages: number [];
   currentPage: number;
-  filterText: string = '';
-  filterBy: string = 'title';
-  searchMode: boolean = false;
+  filterText = '';
+  filterBy = 'title';
+  searchMode = false;
 
   constructor(private articleService: ArticleService,
               private router: Router,
@@ -42,7 +42,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.filterText = params['key'];
         this.filterBy = params['searchBy'];
       }
-      if (this.filterText.trim() != '') {
+      if (this.filterText.trim() !== '') {
         this.searchMode = true;
         window.scrollTo(0, 0);
       }
@@ -65,7 +65,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getPages() {
     let noOfPages: number;
-    if (this.articles.length % 10 == 0) {
+    if (this.articles.length % 10 === 0) {
       noOfPages = this.articles.length / 10;
     } else if (this.articles.length < 10) {
       noOfPages = 1;

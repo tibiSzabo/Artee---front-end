@@ -56,6 +56,6 @@
 
 </div>
 
-<div class="container" @fadeState>
+<div class="container" @fadeState *ngIf="filterBy !== 'category'">
   <div class="no-search-result" *ngIf="!articles | filter:filterBy:filterText"> <p>No search result for: {{ filterText }}</p> </div>
 </div>

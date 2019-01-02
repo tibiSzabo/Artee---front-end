@@ -8,7 +8,7 @@ export class Article {
   public category: Category;
   public date: Date;
 
-  constructor(id:number, title: string, image: string, description: string, category: Category, date: Date) {
+  constructor(id: number, title: string, image: string, description: string, category: Category, date: Date) {
     this.id = id;
     this.title = title;
     this.image = image;
