@@ -45,7 +45,8 @@ import { ListArticlesComponent } from './admin-page/list-articles/list-articles.
     FormsModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [ArticleService],
   bootstrap: [AppComponent]

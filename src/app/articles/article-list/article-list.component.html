@@ -56,6 +56,9 @@
 
 </div>
 
-<div class="container" @fadeState *ngIf="filterBy !== 'category'">
-  <div class="no-search-result" *ngIf="!articles | filter:filterBy:filterText"> <p>No search result for: {{ filterText }}</p> </div>
+<div class="container"
+     style="min-height: 250px"
+     @fadeState
+     *ngIf="filterBy !== 'category' && searchMode && (articles | filter:filterBy:filterText).length === 0">
+  <div class="no-search-result"> <p>No search result for: {{ filterText }}</p> </div>
 </div>

@@ -4,8 +4,6 @@
 }
 
 .header-img {
-  display:block;
-  width:100%;
   object-fit: cover;
   object-position: 50% 80%;
 }
@@ -46,5 +44,3 @@
 .nav-item {
   cursor: pointer;
 }
-
-

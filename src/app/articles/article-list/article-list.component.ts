@@ -47,7 +47,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
         window.scrollTo(0, 0);
       }
     });
-
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +71,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       noOfPages = Math.floor(this.articles.length / 10) + 1;
     }
-    let pages: number [] = [];
+    const pages: number [] = [];
     for (let i = 1; i <= noOfPages; i++) {
       pages.push(i);
     }

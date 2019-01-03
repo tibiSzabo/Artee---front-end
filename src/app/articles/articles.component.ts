@@ -7,9 +7,8 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
 
-  @Input() listMode = true;
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
