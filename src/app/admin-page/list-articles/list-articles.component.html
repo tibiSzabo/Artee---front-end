@@ -1,3 +1,17 @@
-<p>
-  list-articles works!
-</p>
+<div class="container">
+
+  <div class="row justify-content-center">
+    <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let article of articles">
+      <img class="card-img-top" src="{{ article.image }}" alt="Card image cap" style="max-height: 190px">
+      <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <p class="card-text" [innerHTML]="(article.description.length>50) ? (article.description | slice:0:100)+'...':(article.description)"></p>
+        <div class="d-flex mt-5">
+          <a id="editIcon" (click)="onEditArticle(article.id)"><i class="fas fa-edit"></i></a>
+          <a id="deleteIcon" (click)="onDeleteArticle(article.id)" class="ml-auto"><i class="fas fa-trash"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

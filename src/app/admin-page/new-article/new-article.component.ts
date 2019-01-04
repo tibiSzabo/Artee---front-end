@@ -38,10 +38,7 @@ export class NewArticleComponent implements OnInit {
     console.log(this.formSelectedFile);
   }
 
-  onSubmitForm(f: HTMLFormElement) {
-    console.log(this.formTime);
-    console.log(this.formDate);
-
+  onPreviewForm(f: HTMLFormElement) {
     if (!this.formDate) {
       this.formDate = new Date();
     } else {
@@ -58,12 +55,14 @@ export class NewArticleComponent implements OnInit {
     );
 
     if (this.formTime) {
-      this.article.time = this.formTime;
+      this.formDate.setHours(this.formTime.hour);
+      this.formDate.setMinutes(this.formTime.minute);
     }
 
     this.formSubmitted = true;
+  }
 
-    console.log(this.formTime);
-    console.log(this.formDate);
+  onSaveArticle() {
+    this.articleService.addArticle(this.article);
   }
 }

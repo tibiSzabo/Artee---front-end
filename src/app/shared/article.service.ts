@@ -90,5 +90,9 @@ export class ArticleService {
     return this.articles[this.articles.length - 1].id;
   }
 
+  addArticle(article: Article) {
+    this.articles.push(article);
+  }
+
 }
 

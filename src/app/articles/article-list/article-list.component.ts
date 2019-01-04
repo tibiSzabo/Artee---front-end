@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { ScrollService } from '../../shared/scroll.service';
+import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { fadeTrigger } from '../../shared/animations';
 
 @Component({
@@ -14,7 +15,6 @@ import { fadeTrigger } from '../../shared/animations';
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // @HostBinding('@routeFadeState') routeAnimation = true;
   articles: Article [];
   articlesToDisplay: Article [];
   selectedArticleId: number;
@@ -59,7 +59,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   onSelectArticle(id: number) {
     this.selectedArticleId = id;
     this.router.navigate(['article', id - 1]);
-    this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
+     this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
   }
 
   getPages() {
