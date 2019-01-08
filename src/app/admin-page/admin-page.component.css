@@ -8,3 +8,7 @@
   background-color: darkgrey;
   transition: all 200ms;
 }
+
+.container {
+  min-height: 400px;
+}
