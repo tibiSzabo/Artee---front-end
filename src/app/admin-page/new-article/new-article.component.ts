@@ -4,6 +4,7 @@ import { ArticleService } from '../../shared/article.service';
 import { CategoryService } from '../../shared/category.service';
 import { fadeTrigger } from '../../shared/animations';
 import { Article } from '../../articles/article.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-article',
@@ -13,6 +14,8 @@ import { Article } from '../../articles/article.model';
 })
 export class NewArticleComponent implements OnInit {
 
+  editMode = false;
+  articleToEdit: Article;
   categories: Category [];
   formTitle: string;
   formEditor = 'Description of your article!';
@@ -26,11 +29,16 @@ export class NewArticleComponent implements OnInit {
   article: Article;
 
   constructor(private articleService: ArticleService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
+    if (this.route.snapshot.queryParams.edit) {
+      this.editMode = true;
+      this.articleToEdit = this.articleService.getArticle(this.route.snapshot.queryParams.edit);
+    }
   }
 
   changeFile(event) {

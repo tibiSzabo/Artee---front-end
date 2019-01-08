@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../../articles/article.model';
 import { fadeTrigger, listItemRemoved } from '../../shared/animations';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-articles',
@@ -14,11 +14,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListArticlesComponent implements OnInit, OnDestroy {
   articles: Article [];
-  private articlesChangedSubscription: Subscription;
-  private selectedArticle: Article;
+  articlesChangedSubscription: Subscription;
+  selectedArticle: Article;
 
   constructor(private articleService: ArticleService,
-              public modal: NgbModal) {
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
   }
 
   onEditArticle(id: number) {
-
+    this.router.navigate(['admin', 'add'], {queryParams: {edit: id}});
   }
 
   onDeleteArticle(id: number) {
@@ -42,6 +42,5 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
 
   openModal(id: number) {
     this.selectedArticle = this.articleService.getArticle(id);
-    // this.modal.open(content, {centered: true, windowClass: 'modal-holder'});
   }
 }

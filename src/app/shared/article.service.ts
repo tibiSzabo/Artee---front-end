@@ -104,10 +104,12 @@ export class ArticleService {
   }
 
   deleteArticleById(id: number) {
-    this.articles.forEach( (item, index) => {
-      if (item.id == id) { this.articles.splice(index, 1); }
+    this.articles.forEach((item, index) => {
+      if (item.id == id) {
+        this.articles.splice(index, 1);
+      }
     });
-    this.articlesChanged.next(this.articles.slice());
+    this.articlesChanged.next(this.articles.slice(0, this.articles.length));
   }
 
 }
