@@ -86,11 +86,12 @@ export class ArticleService {
   }
 
   getArticle(id: number): Article {
-    let result: Article = null;
-    this.articles.forEach( (item) => {
-      if (item.id === id) { result = item; }
-    });
-    return result;
+    for (let article of this.articles) {
+      if (article.id == id) {
+        return article;
+      }
+    }
+    return null;
   }
 
   getLastArticleId(): number {
@@ -104,7 +105,7 @@ export class ArticleService {
 
   deleteArticleById(id: number) {
     this.articles.forEach( (item, index) => {
-      if (item.id === id) { this.articles.splice(index, 1); }
+      if (item.id == id) { this.articles.splice(index, 1); }
     });
     this.articlesChanged.next(this.articles.slice());
   }
