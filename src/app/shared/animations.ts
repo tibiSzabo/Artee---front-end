@@ -18,3 +18,10 @@ export const headerImageTrigger = trigger('headerImageState', [
   // transition(':leave', animate(300, style({opacity: 0})))
 ]);
 
+export const listItemRemoved = trigger('itemRemovedState', [
+  transition(':leave', [
+    style({transform: 'scale(1)'}),
+    animate('350ms 200ms cubic-bezier(1,.1,1,.99)', style({transform: 'scale(0)'}))
+  ])
+]);
+

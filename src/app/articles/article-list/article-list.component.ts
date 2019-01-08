@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
@@ -23,6 +24,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   filterText = '';
   filterBy = 'title';
   searchMode = false;
+  articlesChangedSubscribtion: Subscription;
 
   constructor(private articleService: ArticleService,
               private router: Router,
@@ -47,6 +49,10 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
         window.scrollTo(0, 0);
       }
     });
+
+    this.articlesChangedSubscribtion = this.articleService.articlesChanged.asObservable().subscribe(
+      value => this.articles = this.articleService.getArticles()
+    );
   }
 
   ngAfterViewInit(): void {
@@ -54,6 +60,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.articlesChangedSubscribtion.unsubscribe();
   }
 
   onSelectArticle(id: number) {
@@ -79,6 +86,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSelectPage(page: number) {
+    this.scroller.resetPosition();
     this.router.navigate(['articles', +page]);
   }
 }
