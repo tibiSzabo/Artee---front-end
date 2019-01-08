@@ -3,30 +3,33 @@ import { Subscription } from 'rxjs';
 
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../../articles/article.model';
-import { listItemRemoved } from '../../shared/animations';
+import { fadeTrigger, listItemRemoved } from '../../shared/animations';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
   styleUrls: ['./list-articles.component.css'],
-  animations: [listItemRemoved]
+  animations: [listItemRemoved, fadeTrigger]
 })
 export class ListArticlesComponent implements OnInit, OnDestroy {
   articles: Article [];
-  private articlesChangedSubscribtion: Subscription;
+  private articlesChangedSubscription: Subscription;
+  private selectedArticle: Article;
 
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService,
+              public modal: NgbModal) {
   }
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
-    this.articlesChangedSubscribtion = this.articleService.articlesChanged.subscribe(
+    this.articlesChangedSubscription = this.articleService.articlesChanged.subscribe(
       articles => this.articles = articles
     );
   }
 
   ngOnDestroy(): void {
-    this.articlesChangedSubscribtion.unsubscribe();
+    this.articlesChangedSubscription.unsubscribe();
   }
 
   onEditArticle(id: number) {
@@ -35,5 +38,10 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
 
   onDeleteArticle(id: number) {
     this.articleService.deleteArticleById(id);
+  }
+
+  openModal(id: number) {
+    this.selectedArticle = this.articleService.getArticle(id);
+    // this.modal.open(content, {centered: true, windowClass: 'modal-holder'});
   }
 }

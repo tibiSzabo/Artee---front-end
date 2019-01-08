@@ -82,11 +82,15 @@ export class ArticleService {
   }
 
   getArticles() {
-    return this.articles.slice();
+    return this.articles.slice(0, this.articles.length);
   }
 
-  getArticle(id: number) {
-    return this.articles[id];
+  getArticle(id: number): Article {
+    let result: Article = null;
+    this.articles.forEach( (item) => {
+      if (item.id === id) { result = item; }
+    });
+    return result;
   }
 
   getLastArticleId(): number {
