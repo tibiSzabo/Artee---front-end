@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Category } from '../shared/category.model';
 import { headerImageTrigger } from '../shared/animations';
 import { CategoryService } from '../shared/category.service';
+import { ScrollService } from '../shared/scroll.service';
 
 @Component({
   selector: 'app-header',
@@ -17,12 +18,12 @@ export class HeaderComponent implements OnInit {
   filterText = '';
 
   constructor(private router: Router,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private scroller: ScrollService) {
   }
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
-    console.log(this.categoryService.getCategory('Category 1'));
   }
 
   onKeyDown(event) {
@@ -36,6 +37,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onCategoryClicked(category: Category) {
+    this.scroller.resetPosition();
     this.router.navigate(['articles'], { queryParams: { searchBy: 'category', key: category.name } });
+  }
+
+  brandClicked() {
+    this.scroller.resetPosition();
+    this.router.navigate(['/']);
   }
 }

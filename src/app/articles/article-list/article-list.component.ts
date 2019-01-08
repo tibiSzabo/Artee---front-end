@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { ScrollService } from '../../shared/scroll.service';
+import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { fadeTrigger } from '../../shared/animations';
 
 @Component({
@@ -14,15 +16,15 @@ import { fadeTrigger } from '../../shared/animations';
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @HostBinding('@routeFadeState') routeAnimation = true;
   articles: Article [];
   articlesToDisplay: Article [];
   selectedArticleId: number;
   pages: number [];
   currentPage: number;
-  filterText: string = '';
-  filterBy: string = 'title';
-  searchMode: boolean = false;
+  filterText = '';
+  filterBy = 'title';
+  searchMode = false;
+  articlesChangedSubscribtion: Subscription;
 
   constructor(private articleService: ArticleService,
               private router: Router,
@@ -42,12 +44,15 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.filterText = params['key'];
         this.filterBy = params['searchBy'];
       }
-      if (this.filterText.trim() != '') {
+      if (this.filterText.trim() !== '') {
         this.searchMode = true;
         window.scrollTo(0, 0);
       }
     });
 
+    this.articlesChangedSubscribtion = this.articleService.articlesChanged.asObservable().subscribe(
+      value => this.articles = this.articleService.getArticles()
+    );
   }
 
   ngAfterViewInit(): void {
@@ -55,24 +60,25 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.articlesChangedSubscribtion.unsubscribe();
   }
 
   onSelectArticle(id: number) {
     this.selectedArticleId = id;
     this.router.navigate(['article', id - 1]);
-    this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
+     this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
   }
 
   getPages() {
     let noOfPages: number;
-    if (this.articles.length % 10 == 0) {
+    if (this.articles.length % 10 === 0) {
       noOfPages = this.articles.length / 10;
     } else if (this.articles.length < 10) {
       noOfPages = 1;
     } else {
       noOfPages = Math.floor(this.articles.length / 10) + 1;
     }
-    let pages: number [] = [];
+    const pages: number [] = [];
     for (let i = 1; i <= noOfPages; i++) {
       pages.push(i);
     }
@@ -80,6 +86,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSelectPage(page: number) {
+    this.scroller.resetPosition();
     this.router.navigate(['articles', +page]);
   }
 }

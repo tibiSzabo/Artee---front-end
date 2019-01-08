@@ -4,11 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ScrollService {
-  public X: number = 0;
-  public Y: number = 0;
-  constructor() { }
+  public X = 0;
+  public Y = 0;
 
-  savePosition(x:number, y:number) {
+  constructor() {
+  }
+
+  savePosition(x: number, y: number) {
     this.X = x;
     this.Y = y;
 

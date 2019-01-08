@@ -1,0 +1,76 @@
+.card {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+
+  transition: all 150ms ease-out;
+  transform: scale(1);
+}
+
+.card:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.02);
+}
+
+a {
+  font-size: 20px;
+}
+
+#editIcon {
+  transition: all 150ms ease-out;
+  transform: scale(1);
+  color: black;
+  cursor: pointer;
+}
+
+#editIcon:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.4);
+  color: #f8c800;
+}
+
+#deleteIcon {
+  transition: all 150ms ease-out;
+  transform: scale(1);
+  color: black;
+  cursor: pointer;
+}
+
+#deleteIcon:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.4);
+  color:red;
+}
+
+.modal-header {
+  color: white;
+  -webkit-border-top-left-radius: 20px;
+  -webkit-border-top-right-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  -moz-border-radius-topright: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal-body {
+  background-color: lightgrey;
+}
+
+.modal-content {
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+}
+
+.modal-footer {
+  -webkit-border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -moz-border-radius-bottomleft: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
