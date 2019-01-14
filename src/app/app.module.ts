@@ -20,7 +20,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.component';
 import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -46,7 +47,9 @@ import { ListArticlesComponent } from './admin-page/list-articles/list-articles.
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    AngularEditorModule
   ],
   providers: [ArticleService],
   bootstrap: [AppComponent]

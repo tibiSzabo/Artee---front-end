@@ -24,7 +24,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   filterText = '';
   filterBy = 'title';
   searchMode = false;
-  articlesChangedSubscribtion: Subscription;
+  articlesChangedSubscription: Subscription;
 
   constructor(private articleService: ArticleService,
               private router: Router,
@@ -33,9 +33,9 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.articles = this.articleService.getArticles();
     this.currentPage = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : 1;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
     this.pages = this.getPages();
 
@@ -50,7 +50,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this.articlesChangedSubscribtion = this.articleService.articlesChanged.asObservable().subscribe(
+    this.articlesChangedSubscription = this.articleService.articlesChanged.asObservable().subscribe(
       value => this.articles = this.articleService.getArticles()
     );
   }
@@ -60,7 +60,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.articlesChangedSubscribtion.unsubscribe();
+    this.articlesChangedSubscription.unsubscribe();
   }
 
   onSelectArticle(id: number) {

@@ -41,7 +41,10 @@
         </div>
       </div>
 
-      <div [froalaEditor] [(froalaModel)]="formEditor"></div>
+      <!--editor-->
+      <div class="editor bg-light">
+        <angular-editor [(ngModel)]="formEditor" [ngModelOptions]="{standalone: true}" [config]="editorConfig"></angular-editor>
+      </div>
 
       <div class="row justify-content-center my-5">
         <button class="btn btn-primary btn-outline-dark" type="submit" [disabled]="!f.form.valid">Preview</button>

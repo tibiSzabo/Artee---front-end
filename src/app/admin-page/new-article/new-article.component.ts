@@ -5,6 +5,7 @@ import { CategoryService } from '../../shared/category.service';
 import { fadeTrigger } from '../../shared/animations';
 import { Article } from '../../articles/article.model';
 import { ActivatedRoute } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-new-article',
@@ -18,7 +19,7 @@ export class NewArticleComponent implements OnInit {
   articleToEdit: Article;
   categories: Category [];
   formTitle: string;
-  formEditor = 'Description of your article!';
+  formEditor;
   formImageUrl: string;
   formSelectedFile: File = null;
   formDate: any;
@@ -27,6 +28,16 @@ export class NewArticleComponent implements OnInit {
   formCategory: any;
   formSubmitted = false;
   article: Article;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '25rem',
+    minHeight: '5rem',
+    placeholder: 'Description of the article.',
+    translate: 'no',
+    uploadUrl: 'v1/images', // if needed
+  };
 
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
