@@ -24,7 +24,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit {
               private router: Router) { }
 
   ngOnInit() {
-    const articleId = this.activeRoute.snapshot.params['id'];
+    const articleId = +this.activeRoute.snapshot.params['id'];
     this.article = this.articleService.getArticle(articleId);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }

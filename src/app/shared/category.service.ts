@@ -21,7 +21,7 @@ export class CategoryService {
   getCategory(name: string) {
     for (let category of this.categories) {
       if (name === category.name) {
-        return category
+        return category;
       }
     }
   }

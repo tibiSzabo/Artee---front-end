@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 })
 export class ArticleService {
   private articles: Article [] = [
-    new Article(1, 'Lorem', 'https://c.pxhere.com/images/b0/cb/aebdee4fcbddbfa3c7552877aeb2-1450307.jpg!d',
+    new Article(1, 'ELSŐ', 'https://c.pxhere.com/images/b0/cb/aebdee4fcbddbfa3c7552877aeb2-1450307.jpg!d',
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
@@ -86,8 +86,8 @@ export class ArticleService {
   }
 
   getArticle(id: number): Article {
-    for (let article of this.articles) {
-      if (article.id == id) {
+    for (const article of this.articles) {
+      if (article.id === id) {
         return article;
       }
     }
@@ -99,14 +99,23 @@ export class ArticleService {
   }
 
   addArticle(article: Article) {
-    this.articles.push(article);
+    this.articles.unshift(article);
     this.articlesChanged.next(this.articles.slice());
   }
 
   deleteArticleById(id: number) {
     this.articles.forEach((item, index) => {
-      if (item.id == id) {
+      if (item.id === id) {
         this.articles.splice(index, 1);
+      }
+    });
+    this.articlesChanged.next(this.articles.slice(0, this.articles.length));
+  }
+
+  updateArticle(id: number, updatedVersion: Article) {
+    this.articles.forEach((item, index) => {
+      if (item.id === id) {
+        this.articles[index] = updatedVersion;
       }
     });
     this.articlesChanged.next(this.articles.slice(0, this.articles.length));

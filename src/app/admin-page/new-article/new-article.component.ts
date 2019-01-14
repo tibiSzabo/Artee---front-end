@@ -4,8 +4,9 @@ import { ArticleService } from '../../shared/article.service';
 import { CategoryService } from '../../shared/category.service';
 import { fadeTrigger } from '../../shared/animations';
 import { Article } from '../../articles/article.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-article',
@@ -19,13 +20,13 @@ export class NewArticleComponent implements OnInit {
   articleToEdit: Article;
   categories: Category [];
   formTitle: string;
+  formCategory;
   formEditor;
   formImageUrl: string;
   formSelectedFile: File = null;
-  formDate: any;
-  formTime: any;
+  formDate;
+  formTime: NgbTimeStruct;
   imageHelp = 'You can either upload an image, or specify the link of the desired image.';
-  formCategory: any;
   formSubmitted = false;
   article: Article;
 
@@ -36,19 +37,23 @@ export class NewArticleComponent implements OnInit {
     minHeight: '5rem',
     placeholder: 'Description of the article.',
     translate: 'no',
-    uploadUrl: 'v1/images', // if needed
+    uploadUrl: 'v1/images'
   };
 
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
     if (this.route.snapshot.queryParams.edit) {
       this.editMode = true;
-      this.articleToEdit = this.articleService.getArticle(this.route.snapshot.queryParams.edit);
+      this.articleToEdit = this.articleService.getArticle(+this.route.snapshot.queryParams.edit);
+      console.log(this.editMode);
+      console.log(this.articleToEdit);
+      this.fillEditmodeDetails();
     }
   }
 
@@ -65,7 +70,7 @@ export class NewArticleComponent implements OnInit {
     }
 
     this.article = new Article(
-      this.articleService.getLastArticleId(),
+      this.editMode ? this.articleToEdit.id : this.articleService.getLastArticleId() + 1,
       this.formTitle,
       this.formImageUrl,
       this.formEditor,
@@ -82,6 +87,30 @@ export class NewArticleComponent implements OnInit {
   }
 
   onSaveArticle() {
-    this.articleService.addArticle(this.article);
+    if (this.editMode) {
+      this.articleService.updateArticle(this.articleToEdit.id, this.article);
+    } else {
+      this.articleService.addArticle(this.article);
+    }
+    this.router.navigate(['admin', 'list']);
+  }
+
+  fillEditmodeDetails() {
+    this.formTitle = this.articleToEdit.title;
+    this.formCategory = this.articleToEdit.category.name;
+    this.formImageUrl = this.articleToEdit.image;
+    this.formEditor = this.articleToEdit.description;
+    this.formDate = {
+      year: this.articleToEdit.date.getFullYear(),
+      month: this.articleToEdit.date.getMonth() + 1,
+      day: this.articleToEdit.date.getDate()
+    };
+    if (this.articleToEdit.date.getMinutes() !== 0 && this.articleToEdit.date.getHours() !== 0) {
+      this.formTime = {
+        hour: this.articleToEdit.date.getHours(),
+        minute: this.articleToEdit.date.getMinutes(),
+        second: 0
+      };
+    }
   }
 }

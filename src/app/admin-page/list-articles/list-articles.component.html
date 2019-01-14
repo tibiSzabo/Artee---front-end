@@ -6,7 +6,9 @@
       <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
         <p class="card-text" [innerHTML]="(article.description.length>50) ? (article.description | slice:0:100)+'...':(article.description)"></p>
-        <div class="d-flex mt-5">
+      </div>
+      <div class="card-footer">
+        <div class="d-flex">
           <a id="editIcon"  (click)="onEditArticle(article.id)"><i class="fas fa-edit"></i></a>
           <a id="deleteIcon"
              data-toggle="modal"

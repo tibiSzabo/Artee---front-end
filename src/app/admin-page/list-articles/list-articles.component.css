@@ -12,6 +12,11 @@
   transform: scale(1.02);
 }
 
+.card-footer {
+  background-color: transparent;
+  border-top: none;
+}
+
 a {
   font-size: 20px;
 }
@@ -60,6 +65,7 @@ a {
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
+  background-color: transparent !important;
 
   -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
   -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);

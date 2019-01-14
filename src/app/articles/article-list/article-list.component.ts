@@ -34,9 +34,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.articles = this.articleService.getArticles();
-    this.currentPage = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : 1;
-    this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+    this.initArticles();
     this.pages = this.getPages();
 
     this.route.queryParams.subscribe(params => {
@@ -65,8 +63,8 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSelectArticle(id: number) {
     this.selectedArticleId = id;
-    this.router.navigate(['article', id - 1]);
-     this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
+    this.router.navigate(['article', id]);
+    this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
   }
 
   getPages() {
@@ -88,5 +86,11 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   onSelectPage(page: number) {
     this.scroller.resetPosition();
     this.router.navigate(['articles', +page]);
+  }
+
+  private initArticles() {
+    this.articles = this.articleService.getArticles();
+    this.currentPage = this.route.snapshot.params['id'] ? +this.route.snapshot.params['id'] : 1;
+    this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
   }
 }
