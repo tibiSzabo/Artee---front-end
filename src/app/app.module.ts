@@ -17,11 +17,11 @@ import { FilterPipe } from './shared/filter.pipe';
 import { PageNotFound } from './pagenotfound/pagenotfound';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.component';
 import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 
 
 @NgModule({
@@ -35,9 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     FilterPipe,
     PageNotFound,
     AdminPageComponent,
-    EditArticlesComponent,
     NewArticleComponent,
-    ListArticlesComponent
+    ListArticlesComponent,
+    EditCategoriesComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
 import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.component';
+import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminPageComponent },
   { path: 'admin/add', component: NewArticleComponent },
   { path: 'admin/list', component: ListArticlesComponent },
-  { path: 'admin/edit/:id', component: EditArticlesComponent },
+  { path: 'admin/categories', component: EditCategoriesComponent },
   { path: '**', component: PageNotFound }
 ];
 
