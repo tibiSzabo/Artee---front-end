@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
 import { headerImageTrigger } from '../shared/animations';
 import { CategoryService } from '../shared/category.service';
 import { ScrollService } from '../shared/scroll.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,11 @@ import { ScrollService } from '../shared/scroll.service';
   styleUrls: ['./header.component.css'],
   animations: [headerImageTrigger]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   displayedHeaderImage = '/assets/header_default.jpg';
   filterText = '';
+  categoriesChangedSubscription: Subscription;
 
   constructor(private router: Router,
               private categoryService: CategoryService,
@@ -24,25 +26,35 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
+    this.categoriesChangedSubscription = this.categoryService.categoriesChanged.asObservable().subscribe(
+      () => {
+        this.categories = this.categoryService.getCategories();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.categoriesChangedSubscription.unsubscribe();
   }
 
   onKeyDown(event) {
     if (event.key === 'Enter') {
-      this.router.navigate(['articles'], { queryParams: { searchBy: 'title', key: this.filterText } });
+      this.router.navigate(['articles'], {queryParams: {searchBy: 'title', key: this.filterText}});
     }
   }
 
   submitSearch() {
-    this.router.navigate(['articles'], { queryParams: { searchBy: 'title', key: this.filterText } });
+    this.router.navigate(['articles'], {queryParams: {searchBy: 'title', key: this.filterText}});
   }
 
   onCategoryClicked(category: Category) {
     this.scroller.resetPosition();
-    this.router.navigate(['articles'], { queryParams: { searchBy: 'category', key: category.name } });
+    this.router.navigate(['articles'], {queryParams: {searchBy: 'category', key: category.name}});
   }
 
   brandClicked() {
     this.scroller.resetPosition();
     this.router.navigate(['/']);
   }
+
 }

@@ -7,7 +7,6 @@ import { PageNotFound } from './pagenotfound/pagenotfound';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
-import { EditArticlesComponent } from './admin-page/edit-articles/edit-articles.component';
 import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 
 const routes: Routes = [

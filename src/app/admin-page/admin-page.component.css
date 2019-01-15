@@ -27,3 +27,8 @@ i:hover {
 i {
   transition: all 150ms ease-out;
 }
+
+.col {
+  margin: 10% 0;
+  text-shadow: 16px 7px 50px black;
+}

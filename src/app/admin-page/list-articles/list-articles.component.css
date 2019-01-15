@@ -57,26 +57,3 @@ a {
   border-top-right-radius: 20px;
 }
 
-.modal-body {
-  background-color: lightgrey;
-}
-
-.modal-content {
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  border-radius: 25px;
-  background-color: transparent !important;
-
-  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-}
-
-.modal-footer {
-  -webkit-border-bottom-right-radius: 20px;
-  -webkit-border-bottom-left-radius: 20px;
-  -moz-border-radius-bottomright: 20px;
-  -moz-border-radius-bottomleft: 20px;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-}

@@ -49,7 +49,9 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.articlesChangedSubscription = this.articleService.articlesChanged.asObservable().subscribe(
-      value => this.articles = this.articleService.getArticles()
+      () => {
+        this.articles = this.articleService.getArticles();
+      }
     );
   }
 

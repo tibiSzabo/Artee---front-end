@@ -74,7 +74,7 @@ export class NewArticleComponent implements OnInit {
       this.formTitle,
       this.formImageUrl,
       this.formEditor,
-      this.categoryService.getCategory(this.formCategory),
+      this.categoryService.getCategoryByName(this.formCategory),
       this.formDate
     );
 
