@@ -86,7 +86,7 @@
       <div class="modal-footer bg-dark">
         <button type="button" class="btn btn-light" data-dismiss="modal" (click)="dismissData()">Cancel</button>
         <button *ngIf="!editMode" type="button" class="btn btn-success" (click)="onSaveCategory()" [disabled]="!f.form.valid" data-dismiss="modal">Add</button>
-        <button *ngIf="editMode" type="button" class="btn btn-success" (click)="onEditCategory()" [disabled]="!f.form.valid" data-dismiss="modal">Edit</button>
+        <button *ngIf="editMode" type="button" class="btn btn-success" (click)="onEditCategory()" data-dismiss="modal">Edit</button>
       </div>
     </div>
   </div>
