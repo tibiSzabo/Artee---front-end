@@ -9,7 +9,6 @@ export class Article {
   public description: string;
   public category: Category;
   public date: Date;
-  private _time: Time;
 
   constructor(id: number, title: string, image: string, description: string, category: Category, date: Date) {
     this.id = id;
@@ -20,7 +19,4 @@ export class Article {
     this.date = date;
   }
 
-  set time(value: Time) {
-    this._time = value;
-  }
 }

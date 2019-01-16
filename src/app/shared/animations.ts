@@ -11,8 +11,8 @@ export const fadeTrigger = trigger('fadeState', [
 
 export const headerImageTrigger = trigger('headerImageState', [
   transition('* => *', [
-    style({opacity: 0.6}),
-    animate(250)
+    style({opacity: 0.1}),
+    animate(450)
   ])
 
   // transition(':leave', animate(300, style({opacity: 0})))

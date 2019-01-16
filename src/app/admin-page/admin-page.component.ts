@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeTrigger } from '../shared/animations';
+import { BackendService } from '../shared/backend.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -10,7 +11,7 @@ import { fadeTrigger } from '../shared/animations';
 export class AdminPageComponent implements OnInit {
   mode = 'menu';
 
-  constructor() { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit() {
   }

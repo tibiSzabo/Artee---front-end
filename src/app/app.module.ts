@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewArticleComponent } from './admin-page/new-article/new-article.component';
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { HttpClientModule } from '@angular/common/http';
 import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 
 
@@ -44,8 +43,6 @@ import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categ
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     NgbModule,
     FormsModule,
     HttpClientModule,
