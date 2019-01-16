@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "egeszsegere": {
+    "artee": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/egeszsegere",
+            "outputPath": "dist/artee",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "egeszsegere:build"
+            "browserTarget": "artee:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "egeszsegere:build:production"
+              "browserTarget": "artee:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "egeszsegere:build"
+            "browserTarget": "artee:build"
           }
         },
         "test": {
@@ -113,7 +113,7 @@
         }
       }
     },
-    "egeszsegere-e2e": {
+    "artee-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -122,11 +122,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "egeszsegere:serve"
+            "devServerTarget": "artee:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "egeszsegere:serve:production"
+              "devServerTarget": "artee:serve:production"
             }
           }
         },
@@ -142,5 +142,5 @@
       }
     }
   },
-  "defaultProject": "egeszsegere"
+  "defaultProject": "artee"
 }
