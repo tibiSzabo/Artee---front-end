@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
-  displayedHeaderImage = '/assets/header_default.jpg';
+  displayedHeaderImage = 'https://c.pxhere.com/photos/49/ee/article_background_broadsheet_business_close_up_communication_copy_daily-1141377.jpg!d';
   filterText = '';
   categoriesChangedSubscription: Subscription;
 

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Category } from './category.model';
 import { Subject } from 'rxjs';
+import { Article } from '../articles/article.model';
+import { BackendService } from './backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private categories: Category [] = [
-  ];
+  private categories: Category [] = [];
 
   categoriesChanged = new Subject<Category []>();
 
-  constructor() {
+  constructor(private backendService: BackendService) {
   }
 
   getCategories() {
@@ -66,6 +67,21 @@ export class CategoryService {
   addCategory(category: Category) {
     this.categories.push(category);
     this.categoriesChanged.next(this.categories.slice(0, this.categories.length));
+  }
+
+  init() {
+    this.backendService.getCategoriesFromDatabase().subscribe(
+      (categories) => {
+        for (const category of categories) {
+          const newCategory = new Category(
+            category.name,
+            category.image);
+          newCategory.id = category.id;
+          this.categories.push(newCategory);
+          this.categoriesChanged.next(this.categories.slice(0, this.categories.length));
+        }
+      }
+    );
   }
 }
 

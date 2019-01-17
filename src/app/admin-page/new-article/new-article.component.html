@@ -1,7 +1,10 @@
 <div class="container my-5" @fadeState *ngIf="!formSubmitted">
 
   <div class="row justify-content-center">
-    <i class="fas fa-arrow-left mb-5" id="topsideBackIcon" placement="top" ngbTooltip="Back" [routerLink]="editMode ? '/admin/list' : '/admin'"></i>
+    <p id="admin-page-title">A new article</p>
+  </div>
+  <div class="row justify-content-center">
+    <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" [routerLink]="editMode ? '/admin/list' : '/admin'"></i>
   </div>
 
   <div class="row justify-content-center">
@@ -84,7 +87,6 @@
     </div>
   </div>
 
-  <hr class="my-5">
 
 </div>
 

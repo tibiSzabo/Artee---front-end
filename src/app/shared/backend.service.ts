@@ -52,7 +52,6 @@ export class BackendService {
   }
 
   deleteCategoryFromDatabase(categoryToDelete: Category) {
-    console.log('http://localhost:8080/api/category/delete/' + categoryToDelete.id);
     return this.httpClient.delete<any>('http://localhost:8080/api/category/delete/' + categoryToDelete.id);
   }
 

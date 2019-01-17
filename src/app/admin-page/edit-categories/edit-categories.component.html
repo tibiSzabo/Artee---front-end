@@ -1,4 +1,11 @@
-<div class="container">
+<div class="container" @fadeState>
+
+  <div class="row justify-content-center">
+    <p id="admin-page-title">Manage categories</p>
+  </div>
+  <div class="row justify-content-center">
+    <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" routerLink="/admin"></i>
+  </div>
 
   <div class="list-group align-items-center" [@listAnimation] = "categories.length">
     <li class="list-group-item text-center"
@@ -28,11 +35,11 @@
 </div>
 
 <!--Modal - confirmation-->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true" *ngIf="selectedCategory != null">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title">Delete Article</h5>
+        <h5 class="modal-title">Delete Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

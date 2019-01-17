@@ -53,8 +53,6 @@ export class NewArticleComponent implements OnInit {
     if (this.route.snapshot.queryParams.edit) {
       this.editMode = true;
       this.articleToEdit = this.articleService.getArticle(+this.route.snapshot.queryParams.edit);
-      console.log(this.editMode);
-      console.log(this.articleToEdit);
       this.fillEditmodeDetails();
     }
   }
@@ -65,11 +63,7 @@ export class NewArticleComponent implements OnInit {
   }
 
   onPreviewForm(f: HTMLFormElement) {
-    if (!this.formDate) {
-      this.formDate = new Date();
-    } else {
-      this.formDate = new Date(this.formDate.year, this.formDate.month - 1, this.formDate.day);
-    }
+    this.manageFormDate();
 
     this.article = new Article(
       this.formTitle,
@@ -79,17 +73,36 @@ export class NewArticleComponent implements OnInit {
       this.formDate
     );
 
+    this.formSubmitted = true;
+  }
+
+  private manageFormDate() {
+    if (!this.formDate) {
+      this.formDate = new Date();
+    } else {
+      this.formDate = new Date(this.formDate.year, this.formDate.month - 1, this.formDate.day);
+    }
+
     if (this.formTime) {
       this.formDate.setHours(this.formTime.hour);
       this.formDate.setMinutes(this.formTime.minute);
     }
 
-    this.formSubmitted = true;
+    this.formDate = this.formDate.valueOf();
   }
 
   onSaveArticle() {
     if (this.editMode) {
-      this.articleService.updateArticle(this.articleToEdit.id, this.article);
+      this.backendService.editArticleInDatabase(this.articleToEdit).subscribe(
+        (response) => {
+          console.log(response.message);
+          if (response.success) {
+            this.article.id = response.id;
+            this.articleService.updateArticle(this.articleToEdit.id, this.article);
+          }
+        }
+      );
+
     } else {
       this.backendService.addArticleToDatabase(this.article).subscribe(
         (response) => {
@@ -101,6 +114,7 @@ export class NewArticleComponent implements OnInit {
         }
       );
     }
+
     this.router.navigate(['admin', 'list']);
   }
 
@@ -109,17 +123,6 @@ export class NewArticleComponent implements OnInit {
     this.formCategory = this.articleToEdit.category.name;
     this.formImageUrl = this.articleToEdit.image;
     this.formEditor = this.articleToEdit.description;
-    this.formDate = {
-      year: this.articleToEdit.date.getFullYear(),
-      month: this.articleToEdit.date.getMonth() + 1,
-      day: this.articleToEdit.date.getDate()
-    };
-    if (this.articleToEdit.date.getMinutes() !== 0 && this.articleToEdit.date.getHours() !== 0) {
-      this.formTime = {
-        hour: this.articleToEdit.date.getHours(),
-        minute: this.articleToEdit.date.getMinutes(),
-        second: 0
-      };
-    }
+    this.formDate = this.articleToEdit.date;
   }
 }

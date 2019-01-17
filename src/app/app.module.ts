@@ -21,8 +21,13 @@ import { NewArticleComponent } from './admin-page/new-article/new-article.compon
 import { ListArticlesComponent } from './admin-page/list-articles/list-articles.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
+import { CategoryService } from './shared/category.service';
 
-export function articleServiceFactory(provider: ArticleService) {
+export function articleProviderFactory(provider: ArticleService) {
+  return () => provider.init();
+}
+
+export function categoryProviderFactory(provider: CategoryService) {
   return () => provider.init();
 }
 
@@ -51,7 +56,10 @@ export function articleServiceFactory(provider: ArticleService) {
     HttpClientModule,
     AngularEditorModule
   ],
-  providers: [ArticleService, { provide: APP_INITIALIZER, useFactory: articleServiceFactory, deps: [ArticleService], multi: true }],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: articleProviderFactory, deps: [ArticleService], multi: true },
+    { provide: APP_INITIALIZER, useFactory: categoryProviderFactory, deps: [CategoryService], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

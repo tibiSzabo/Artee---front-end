@@ -5,6 +5,7 @@ import { ArticleService } from '../../shared/article.service';
 import { Article } from '../../articles/article.model';
 import { fadeTrigger, listItemRemoved } from '../../shared/animations';
 import { Router } from '@angular/router';
+import { BackendService } from '../../shared/backend.service';
 
 @Component({
   selector: 'app-list-articles',
@@ -15,9 +16,10 @@ import { Router } from '@angular/router';
 export class ListArticlesComponent implements OnInit, OnDestroy {
   articles: Article [];
   articlesChangedSubscription: Subscription;
-  selectedArticle: Article;
+  selectedArticle: Article = null;
 
   constructor(private articleService: ArticleService,
+              private backendService: BackendService,
               private router: Router) {
   }
 
@@ -29,7 +31,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.articlesChangedSubscription.unsubscribe();
+    this.articlesChangedSubscription.unsubscribe();
   }
 
   onEditArticle(id: number) {
@@ -37,7 +39,14 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
   }
 
   onDeleteArticle(id: number) {
-    this.articleService.deleteArticleById(id);
+    this.backendService.deleteArticleFromDatabase(this.selectedArticle).subscribe(
+      (response) => {
+        console.log(response.message);
+        if (response.success) {
+          this.articleService.deleteArticleById(id);
+        }
+      }
+    );
   }
 
   openModal(id: number) {

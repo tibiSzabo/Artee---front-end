@@ -7,9 +7,9 @@ export class Article {
   public image: string;
   public description: string;
   public category: Category;
-  public date: Date;
+  public date: number; // epoch
 
-  constructor(title: string, image: string, description: string, category: Category, date: Date) {
+  constructor(title: string, image: string, description: string, category: Category, date: number) {
     this.title = title;
     this.image = image;
     this.description = description;

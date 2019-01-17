@@ -13,8 +13,8 @@ import { BackendService } from '../../shared/backend.service';
 })
 export class EditCategoriesComponent implements OnInit, OnDestroy {
 
-  categories: Category [];
-  selectedCategory: Category;
+  categories: Category [] = [];
+  selectedCategory: Category = null;
   newCategoryTitle: string;
   newCategoryImageUrl = ' ';
   categoriesChangedSubscription: Subscription;
