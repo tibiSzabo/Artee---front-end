@@ -80,6 +80,7 @@ export class CategoryService {
           this.categories.push(newCategory);
           this.categoriesChanged.next(this.categories.slice(0, this.categories.length));
         }
+        console.log(this.categories);
       }
     );
   }

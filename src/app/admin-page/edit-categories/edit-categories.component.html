@@ -87,7 +87,7 @@
           </div>
         </form>
 
-        <img *ngIf="newCategoryImageUrl !== ' ' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
+        <img *ngIf="newCategoryImageUrl !== '' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
         <img *ngIf="editMode" [src]="selectedCategory.image" alt="Category Image" @fadeState>
       </div>
       <div class="modal-footer bg-dark">

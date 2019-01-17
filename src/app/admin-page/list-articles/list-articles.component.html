@@ -13,7 +13,7 @@
       <img class="card-img-top" src="{{ article.image }}" alt="Card image cap" style="max-height: 190px">
       <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
-        <p class="card-text" [innerHTML]="(article.description.length>50) ? (article.description | slice:0:100)+'...':(article.description)"></p>
+        <p class="card-text"></p>
       </div>
       <div class="card-footer">
         <div class="d-flex">

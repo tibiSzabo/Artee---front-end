@@ -16,7 +16,7 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
   categories: Category [] = [];
   selectedCategory: Category = null;
   newCategoryTitle: string;
-  newCategoryImageUrl = ' ';
+  newCategoryImageUrl = '';
   categoriesChangedSubscription: Subscription;
   editMode = false;
 
@@ -77,8 +77,8 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
   onEditCategory() {
     let title;
     let image;
-    this.newCategoryTitle === ' ' ? title = this.selectedCategory.name : title = this.newCategoryTitle;
-    this.newCategoryImageUrl === ' ' ? image = this.selectedCategory.image : image = this.newCategoryImageUrl;
+    this.newCategoryTitle === '' ? title = this.selectedCategory.name : title = this.newCategoryTitle;
+    this.newCategoryImageUrl === '' ? image = this.selectedCategory.image : image = this.newCategoryImageUrl;
     const newCategory = new Category(title, image);
     newCategory.id = this.selectedCategory.id;
 
@@ -95,7 +95,7 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
   }
 
   dismissData() {
-    this.newCategoryTitle = ' ';
-    this.newCategoryImageUrl = ' ';
+    this.newCategoryTitle = '';
+    this.newCategoryImageUrl = '';
   }
 }

@@ -72,6 +72,7 @@ export class NewArticleComponent implements OnInit {
       this.categoryService.getCategoryByName(this.formCategory),
       this.formDate
     );
+    this.article.id = this.articleToEdit.id;
 
     this.formSubmitted = true;
   }
@@ -93,11 +94,10 @@ export class NewArticleComponent implements OnInit {
 
   onSaveArticle() {
     if (this.editMode) {
-      this.backendService.editArticleInDatabase(this.articleToEdit).subscribe(
+      this.backendService.editArticleInDatabase(this.article).subscribe(
         (response) => {
           console.log(response.message);
           if (response.success) {
-            this.article.id = response.id;
             this.articleService.updateArticle(this.articleToEdit.id, this.article);
           }
         }
