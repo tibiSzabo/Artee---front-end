@@ -1,5 +1,4 @@
 import { Category } from '../shared/category.model';
-import { Time } from '@angular/common';
 
 export class Article {
 
@@ -8,11 +7,9 @@ export class Article {
   public image: string;
   public description: string;
   public category: Category;
-  public date: Date;
-  private _time: Time;
+  public date: number; // epoch
 
-  constructor(id: number, title: string, image: string, description: string, category: Category, date: Date) {
-    this.id = id;
+  constructor(title: string, image: string, description: string, category: Category, date: number) {
     this.title = title;
     this.image = image;
     this.description = description;
@@ -20,7 +17,4 @@ export class Article {
     this.date = date;
   }
 
-  set time(value: Time) {
-    this._time = value;
-  }
 }

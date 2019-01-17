@@ -5,6 +5,7 @@ footer {
   left: 0;
   padding: 1rem;
   background-color: lightgray;
+  box-shadow: 0 0 17px 2px black;
 }
 
 a {

@@ -1,5 +1,4 @@
 <div class="container my-5" @fadeState>
-
   <div *ngIf="!searchMode">
     <nav aria-label="...">
       <ul class="pagination pagination-lg">
@@ -59,6 +58,6 @@
 <div class="container"
      style="min-height: 250px"
      @fadeState
-     *ngIf="filterBy !== 'category' && searchMode && (articles | filter:filterBy:filterText).length === 0">
+     *ngIf="searchMode && (articles | filter:filterBy:filterText).length === 0">
   <div class="no-search-result"> <p>No search result for: {{ filterText }}</p> </div>
 </div>

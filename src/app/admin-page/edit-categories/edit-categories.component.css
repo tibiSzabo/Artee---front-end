@@ -1,0 +1,96 @@
+.li-left {
+  float: left;
+}
+
+.li-right {
+  float: right;
+}
+
+.list-group-item {
+  min-width: 80%;
+
+  background-color: lightgrey;
+  border-color: transparent;
+  transition: all 500ms ease-in;
+}
+
+.list-group-item:hover {
+  background-color: #b8b5b5;
+  border-radius: 50px;
+  transition: all 500ms ease-out;
+}
+
+i {
+  font-size: 20px;
+}
+
+#categoryIcon {
+  margin-left: 15px;
+  margin-right: 7px;
+}
+
+#editIcon {
+  margin-right: 10px;
+
+  transition: all 150ms ease-out;
+  transform: scale(1);
+  color: black;
+  cursor: pointer;
+}
+
+#editIcon:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.4);
+  color: yellow;
+}
+
+#trashIcon {
+  margin-right: 10px;
+
+  transition: all 150ms ease-out;
+  transform: scale(1);
+  color: black;
+  cursor: pointer;
+}
+
+#trashIcon:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.4);
+  color: red;
+}
+
+#addCategory {
+  cursor: pointer;
+}
+
+#addIcon {
+  transition: all 150ms ease-out;
+  transform: scale(1);
+  color: black;
+}
+
+#addIcon:hover {
+  transition: all 150ms ease-in;
+  transform: scale(1.4);
+  color: green;
+}
+
+.container {
+  padding-top: 8%;
+  padding-bottom: 8%;
+}
+
+img {
+  max-height: 200px;
+  max-width: 500px;
+  border-style: none;
+  margin: 25px auto 25px auto;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 6px 6px 15px black;
+}
+
+.form-control {
+  background-color: #d3d3d3;
+  box-shadow: inset 2px 2px 7px 0px black;
+}

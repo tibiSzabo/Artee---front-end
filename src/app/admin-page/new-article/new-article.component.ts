@@ -4,7 +4,10 @@ import { ArticleService } from '../../shared/article.service';
 import { CategoryService } from '../../shared/category.service';
 import { fadeTrigger } from '../../shared/animations';
 import { Article } from '../../articles/article.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { BackendService } from '../../shared/backend.service';
 
 @Component({
   selector: 'app-new-article',
@@ -18,26 +21,39 @@ export class NewArticleComponent implements OnInit {
   articleToEdit: Article;
   categories: Category [];
   formTitle: string;
-  formEditor = 'Description of your article!';
+  formCategory;
+  formEditor;
   formImageUrl: string;
   formSelectedFile: File = null;
-  formDate: any;
-  formTime: any;
+  formDate;
+  formTime: NgbTimeStruct;
   imageHelp = 'You can either upload an image, or specify the link of the desired image.';
-  formCategory: any;
   formSubmitted = false;
   article: Article;
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '25rem',
+    minHeight: '5rem',
+    placeholder: 'Description of the article.',
+    translate: 'no',
+    uploadUrl: 'v1/images'
+  };
+
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
-              private route: ActivatedRoute) {
+              private backendService: BackendService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.categories = this.categoryService.getCategories();
     if (this.route.snapshot.queryParams.edit) {
       this.editMode = true;
-      this.articleToEdit = this.articleService.getArticle(this.route.snapshot.queryParams.edit);
+      this.articleToEdit = this.articleService.getArticle(+this.route.snapshot.queryParams.edit);
+      this.fillEditmodeDetails();
     }
   }
 
@@ -47,30 +63,66 @@ export class NewArticleComponent implements OnInit {
   }
 
   onPreviewForm(f: HTMLFormElement) {
+    this.manageFormDate();
+
+    this.article = new Article(
+      this.formTitle,
+      this.formImageUrl,
+      this.formEditor,
+      this.categoryService.getCategoryByName(this.formCategory),
+      this.formDate
+    );
+
+    this.formSubmitted = true;
+  }
+
+  private manageFormDate() {
     if (!this.formDate) {
       this.formDate = new Date();
     } else {
       this.formDate = new Date(this.formDate.year, this.formDate.month - 1, this.formDate.day);
     }
 
-    this.article = new Article(
-      this.articleService.getLastArticleId(),
-      this.formTitle,
-      this.formImageUrl,
-      this.formEditor,
-      this.categoryService.getCategory(this.formCategory),
-      this.formDate
-    );
-
     if (this.formTime) {
       this.formDate.setHours(this.formTime.hour);
       this.formDate.setMinutes(this.formTime.minute);
     }
 
-    this.formSubmitted = true;
+    this.formDate = this.formDate.valueOf();
   }
 
   onSaveArticle() {
-    this.articleService.addArticle(this.article);
+    if (this.editMode) {
+      this.backendService.editArticleInDatabase(this.articleToEdit).subscribe(
+        (response) => {
+          console.log(response.message);
+          if (response.success) {
+            this.article.id = response.id;
+            this.articleService.updateArticle(this.articleToEdit.id, this.article);
+          }
+        }
+      );
+
+    } else {
+      this.backendService.addArticleToDatabase(this.article).subscribe(
+        (response) => {
+          console.log(response.message);
+          if (response.success) {
+            this.article.id = response.id;
+            this.articleService.addArticle(this.article);
+          }
+        }
+      );
+    }
+
+    this.router.navigate(['admin', 'list']);
+  }
+
+  fillEditmodeDetails() {
+    this.formTitle = this.articleToEdit.title;
+    this.formCategory = this.articleToEdit.category.name;
+    this.formImageUrl = this.articleToEdit.image;
+    this.formEditor = this.articleToEdit.description;
+    this.formDate = this.articleToEdit.date;
   }
 }

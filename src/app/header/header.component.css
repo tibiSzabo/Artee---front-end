@@ -5,12 +5,14 @@
 
 .header-img {
   object-fit: cover;
-  object-position: 50% 80%;
+  /*object-position: 50% 40%;*/
   width: 100%;
+  max-height: 400px;
 }
 
 .navbar {
   min-height: 75px;
+  box-shadow: 0 5px 17px 2px black;
 }
 
 .navbar-brand {
@@ -21,15 +23,21 @@
 }
 
 .nav-link {
+  margin-left: 5px;
   font-size: 17px;
-  transform: scale(1);
-  transition: all 50ms ease-in;
+  font-family: Ubuntu-regular, serif;
+  transition: all 250ms ease-in;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
 }
 
 .nav-link:hover {
-  font-size: 17px;
-  transform: scale(1.15);
-  transition: all 50ms ease-in;
+  font-weight: bold;
+  transition: all 250ms ease-out;
+  background-color: lightgrey;
+  color: #343a40 !important;
+  box-shadow: inset 0px 0px 7px 0px black;
 }
 
 .fa-search {

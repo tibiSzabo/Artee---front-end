@@ -7,6 +7,7 @@ import { Article } from '../article.model';
 import { ScrollService } from '../../shared/scroll.service';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { fadeTrigger } from '../../shared/animations';
+import { CategoryService } from '../../shared/category.service';
 
 @Component({
   selector: 'app-article-list',
@@ -24,19 +25,18 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   filterText = '';
   filterBy = 'title';
   searchMode = false;
-  articlesChangedSubscribtion: Subscription;
+  articlesChangedSubscription: Subscription;
 
   constructor(private articleService: ArticleService,
+              private categoryService: CategoryService,
               private router: Router,
               private scroller: ScrollService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.articles = this.articleService.getArticles();
-    this.currentPage = this.route.snapshot.params['id'] ? this.route.snapshot.params['id'] : 1;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+    this.initArticles();
     this.pages = this.getPages();
 
     this.route.queryParams.subscribe(params => {
@@ -50,8 +50,10 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    this.articlesChangedSubscribtion = this.articleService.articlesChanged.asObservable().subscribe(
-      value => this.articles = this.articleService.getArticles()
+    this.articlesChangedSubscription = this.articleService.articlesChanged.subscribe(
+      (articles: Article[]) => {
+        this.initArticles();
+      }
     );
   }
 
@@ -60,13 +62,13 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.articlesChangedSubscribtion.unsubscribe();
+    this.articlesChangedSubscription.unsubscribe();
   }
 
   onSelectArticle(id: number) {
     this.selectedArticleId = id;
-    this.router.navigate(['article', id - 1]);
-     this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
+    this.router.navigate(['article', id]);
+    this.scroller.savePosition(window.pageXOffset, window.pageYOffset);
   }
 
   getPages() {
@@ -89,4 +91,12 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.scroller.resetPosition();
     this.router.navigate(['articles', +page]);
   }
+
+  private initArticles() {
+    this.articles = this.articleService.getArticles();
+    this.currentPage = this.route.snapshot.params['id'] ? +this.route.snapshot.params['id'] : 1;
+    this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+
+  }
+
 }

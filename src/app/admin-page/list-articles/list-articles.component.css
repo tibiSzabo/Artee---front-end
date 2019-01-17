@@ -1,3 +1,8 @@
+.container {
+  padding-top: 8%;
+  padding-bottom: 8%;
+}
+
 .card {
   -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
   -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
@@ -7,9 +12,19 @@
   transform: scale(1);
 }
 
+.card-body {
+  min-height: 200px;
+
+}
+
 .card:hover {
   transition: all 150ms ease-in;
   transform: scale(1.02);
+}
+
+.card-footer {
+  background-color: transparent;
+  border-top: none;
 }
 
 a {
@@ -52,25 +67,3 @@ a {
   border-top-right-radius: 20px;
 }
 
-.modal-body {
-  background-color: lightgrey;
-}
-
-.modal-content {
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  border-radius: 25px;
-
-  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
-}
-
-.modal-footer {
-  -webkit-border-bottom-right-radius: 20px;
-  -webkit-border-bottom-left-radius: 20px;
-  -moz-border-radius-bottomright: 20px;
-  -moz-border-radius-bottomleft: 20px;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
