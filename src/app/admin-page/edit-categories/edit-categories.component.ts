@@ -3,6 +3,7 @@ import { CategoryService } from '../../shared/category.service';
 import { Category } from '../../shared/category.model';
 import { fadeTrigger, listAnimation } from '../../shared/animations';
 import { Subscription } from 'rxjs';
+import { BackendService } from '../../shared/backend.service';
 
 @Component({
   selector: 'app-edit-categories',
@@ -15,11 +16,12 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
   categories: Category [];
   selectedCategory: Category;
   newCategoryTitle: string;
-  newCategoryImageUrl = '';
+  newCategoryImageUrl = ' ';
   categoriesChangedSubscription: Subscription;
   editMode = false;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService,
+              private backendService: BackendService) {
   }
 
   ngOnInit() {
@@ -44,36 +46,56 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
 
   onSelectToDelete(category: Category) {
     this.selectedCategory = category;
-    console.log(this.selectedCategory);
   }
 
   onDeleteCategory() {
-    this.categoryService.deleteCategory(this.selectedCategory.id);
+    this.backendService.deleteCategoryFromDatabase(this.selectedCategory).subscribe(
+      (response) => {
+        console.log(response.message);
+        if (response.success) {
+          this.categoryService.deleteCategory(this.selectedCategory.id);
+        }
+      });
   }
 
   onSaveCategory() {
     const newCategory = new Category(
-      this.categoryService.getLastCategoryId() + 1,
       this.newCategoryTitle,
       this.newCategoryImageUrl);
-
-    this.categoryService.addCategory(newCategory);
-
+    this.backendService.addCategoryToDatabase(newCategory).subscribe(
+      (response) => {
+        console.log(response.message);
+        if (response.success) {
+          newCategory.id = response.id;
+          this.categoryService.addCategory(newCategory);
+        }
+      }
+    );
     this.dismissData();
   }
 
   onEditCategory() {
-    const newCategory = new Category(
-      this.categoryService.getLastCategoryId() + 1,
-      this.newCategoryTitle,
-      this.newCategoryImageUrl);
+    let title;
+    let image;
+    this.newCategoryTitle === ' ' ? title = this.selectedCategory.name : title = this.newCategoryTitle;
+    this.newCategoryImageUrl === ' ' ? image = this.selectedCategory.image : image = this.newCategoryImageUrl;
+    const newCategory = new Category(title, image);
+    newCategory.id = this.selectedCategory.id;
 
-    this.categoryService.updateCategory(this.selectedCategory.id, newCategory);
+    this.backendService.editCategoryInDatabase(newCategory).subscribe(
+      (response) => {
+        console.log(response.message);
+        if (response.success) {
+          this.categoryService.updateCategory(this.selectedCategory.id, newCategory);
+        }
+      }
+    );
     this.editMode = false;
+    this.dismissData();
   }
 
-   dismissData() {
-    this.newCategoryTitle = '';
-    this.newCategoryImageUrl = '';
+  dismissData() {
+    this.newCategoryTitle = ' ';
+    this.newCategoryImageUrl = ' ';
   }
 }

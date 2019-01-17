@@ -55,7 +55,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title">Add new category:</h5>
+        <h5 class="modal-title" [innerHTML]="editMode ? 'Edit category' : 'Add new category:'"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -80,7 +80,7 @@
           </div>
         </form>
 
-        <img *ngIf="newCategoryImageUrl !== '' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
+        <img *ngIf="newCategoryImageUrl !== ' ' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
         <img *ngIf="editMode" [src]="selectedCategory.image" alt="Category Image" @fadeState>
       </div>
       <div class="modal-footer bg-dark">

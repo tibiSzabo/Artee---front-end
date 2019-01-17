@@ -7,6 +7,7 @@ import { Article } from '../../articles/article.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { BackendService } from '../../shared/backend.service';
 
 @Component({
   selector: 'app-new-article',
@@ -42,6 +43,7 @@ export class NewArticleComponent implements OnInit {
 
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
+              private backendService: BackendService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -70,7 +72,6 @@ export class NewArticleComponent implements OnInit {
     }
 
     this.article = new Article(
-      this.editMode ? this.articleToEdit.id : this.articleService.getLastArticleId() + 1,
       this.formTitle,
       this.formImageUrl,
       this.formEditor,
@@ -90,7 +91,15 @@ export class NewArticleComponent implements OnInit {
     if (this.editMode) {
       this.articleService.updateArticle(this.articleToEdit.id, this.article);
     } else {
-      this.articleService.addArticle(this.article);
+      this.backendService.addArticleToDatabase(this.article).subscribe(
+        (response) => {
+          console.log(response.message);
+          if (response.success) {
+            this.article.id = response.id;
+            this.articleService.addArticle(this.article);
+          }
+        }
+      );
     }
     this.router.navigate(['admin', 'list']);
   }

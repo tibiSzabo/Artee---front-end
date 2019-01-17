@@ -8,9 +8,6 @@ import { Subject } from 'rxjs';
 export class CategoryService {
 
   private categories: Category [] = [
-    new Category(1, 'Category 1', '/assets/header1.jpg'),
-    new Category(2, 'Category 2', '/assets/header2.jpg'),
-    new Category(3, 'Category 3', '/assets/header3.jpg')
   ];
 
   categoriesChanged = new Subject<Category []>();

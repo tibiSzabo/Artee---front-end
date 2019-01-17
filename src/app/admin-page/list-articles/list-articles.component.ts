@@ -29,7 +29,7 @@ export class ListArticlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.articlesChangedSubscription.unsubscribe();
+    // this.articlesChangedSubscription.unsubscribe();
   }
 
   onEditArticle(id: number) {

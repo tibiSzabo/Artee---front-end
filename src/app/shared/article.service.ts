@@ -9,7 +9,7 @@ import { BackendService } from './backend.service';
   providedIn: 'root',
 })
 export class ArticleService {
-  private articles: Article [];
+  private articles: Article [] = [];
   // private articles: Article [] = [
   //   new Article(1, 'ELSŐ', 'https://c.pxhere.com/images/b0/cb/aebdee4fcbddbfa3c7552877aeb2-1450307.jpg!d',
   //     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque' +
@@ -97,20 +97,8 @@ export class ArticleService {
     return null;
   }
 
-  getLastArticleId(): number {
-    let highestId = 0;
-    for (const article of this.articles) {
-      if (article.id >= highestId) {
-        highestId = article.id;
-      }
-    }
-    return highestId;
-  }
-
   addArticle(article: Article) {
-    this.backendService.addArticleToDatabase(article);
-
-    this.articles.unshift(article);
+    this.articles.push(article);
     this.articlesChanged.next(this.articles.slice());
   }
 
@@ -130,6 +118,24 @@ export class ArticleService {
       }
     });
     this.articlesChanged.next(this.articles.slice(0, this.articles.length));
+  }
+
+  init() {
+    this.backendService.getArticlesFromDatabase().subscribe(
+      (articles) => {
+        for (const article of articles) {
+          const newArticle = new Article(
+            article.title,
+            article.image,
+            article.description,
+            this.categoryService.getCategoryById(article.category.id),
+            article.date);
+          newArticle.id = article.id;
+          this.articles.push(article);
+        }
+        console.log(this.articles);
+      }
+    );
   }
 
 }

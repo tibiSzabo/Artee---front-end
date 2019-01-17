@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +22,9 @@ import { ListArticlesComponent } from './admin-page/list-articles/list-articles.
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 
+export function articleServiceFactory(provider: ArticleService) {
+  return () => provider.init();
+}
 
 @NgModule({
   declarations: [
@@ -48,7 +51,7 @@ import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categ
     HttpClientModule,
     AngularEditorModule
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, { provide: APP_INITIALIZER, useFactory: articleServiceFactory, deps: [ArticleService], multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

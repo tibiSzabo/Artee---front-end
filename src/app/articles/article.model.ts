@@ -1,5 +1,4 @@
 import { Category } from '../shared/category.model';
-import { Time } from '@angular/common';
 
 export class Article {
 
@@ -10,8 +9,7 @@ export class Article {
   public category: Category;
   public date: Date;
 
-  constructor(id: number, title: string, image: string, description: string, category: Category, date: Date) {
-    this.id = id;
+  constructor(title: string, image: string, description: string, category: Category, date: Date) {
     this.title = title;
     this.image = image;
     this.description = description;

@@ -7,6 +7,8 @@ import { Article } from '../article.model';
 import { ScrollService } from '../../shared/scroll.service';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
 import { fadeTrigger } from '../../shared/animations';
+import { BackendService } from '../../shared/backend.service';
+import { CategoryService } from '../../shared/category.service';
 
 @Component({
   selector: 'app-article-list',
@@ -27,9 +29,11 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   articlesChangedSubscription: Subscription;
 
   constructor(private articleService: ArticleService,
+              private categoryService: CategoryService,
               private router: Router,
               private scroller: ScrollService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private backendService: BackendService) {
   }
 
   ngOnInit() {
@@ -60,7 +64,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.articlesChangedSubscription.unsubscribe();
+    // this.articlesChangedSubscription.unsubscribe();
   }
 
   onSelectArticle(id: number) {
@@ -91,8 +95,24 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initArticles() {
+    // this.articleService.init();
     this.articles = this.articleService.getArticles();
     this.currentPage = this.route.snapshot.params['id'] ? +this.route.snapshot.params['id'] : 1;
     this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+
+  }
+
+  onInitData() {
+    this.backendService.getArticlesFromDatabase().subscribe(
+      (response) => {
+        for (const resp of response) {
+          console.log(resp);
+          const newArticle = new Article(resp.title, resp.image, resp.description, resp.category, resp.date);
+          newArticle.id = resp.id;
+          console.log(newArticle);
+          this.articleService.addArticle(newArticle);
+        }
+      }
+    );
   }
 }
