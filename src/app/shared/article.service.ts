@@ -69,7 +69,7 @@ export class ArticleService {
         }
         this.articlesChanged.next(this.articles.slice());
         this.articlesLoaded.next();
-        console.log(articles);
+        // console.log(articles);
       }
     );
 

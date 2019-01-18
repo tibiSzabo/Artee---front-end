@@ -1,14 +1,14 @@
-<div class="container" @fadeState>
+<div class="container">
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" @fadeState>
     <p id="admin-page-title">Manage articles</p>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" @fadeState>
     <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" routerLink="/admin"></i>
   </div>
 
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" [@listAnimation2]="articles.length">
     <div class="card my-3 mx-3" style="width: 18rem;" *ngFor="let article of articles" @itemRemovedState>
       <img class="card-img-top" src="{{ article.image }}" alt="Card image cap" style="max-height: 190px">
       <div class="card-body">

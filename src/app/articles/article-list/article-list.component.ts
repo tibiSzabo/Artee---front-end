@@ -6,14 +6,14 @@ import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
 import { ScrollService } from '../../shared/scroll.service';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
-import { fadeTrigger } from '../../shared/animations';
+import { fadeTrigger, listAnimation, listAnimation2 } from '../../shared/animations';
 import { CategoryService } from '../../shared/category.service';
 
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
-  animations: [routeFadeStateTrigger, fadeTrigger]
+  animations: [routeFadeStateTrigger, fadeTrigger, listAnimation, listAnimation2]
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 

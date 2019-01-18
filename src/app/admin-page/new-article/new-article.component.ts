@@ -72,7 +72,10 @@ export class NewArticleComponent implements OnInit {
       this.categoryService.getCategoryByName(this.formCategory),
       this.formDate
     );
-    this.article.id = this.articleToEdit.id;
+
+    if (this.editMode) {
+      this.article.id = this.articleToEdit.id;
+    }
 
     this.formSubmitted = true;
   }

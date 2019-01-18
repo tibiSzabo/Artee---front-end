@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { CategoryService } from '../../shared/category.service';
 import { Category } from '../../shared/category.model';
-import { fadeTrigger, listAnimation } from '../../shared/animations';
+import { fadeTrigger, listAnimation, listAnimation2 } from '../../shared/animations';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../../shared/backend.service';
 
@@ -9,9 +9,9 @@ import { BackendService } from '../../shared/backend.service';
   selector: 'app-edit-categories',
   templateUrl: './edit-categories.component.html',
   styleUrls: ['./edit-categories.component.css'],
-  animations: [fadeTrigger, listAnimation]
+  animations: [fadeTrigger, listAnimation, listAnimation2]
 })
-export class EditCategoriesComponent implements OnInit, OnDestroy {
+export class EditCategoriesComponent implements OnInit, OnDestroy, OnChanges {
 
   categories: Category [] = [];
   selectedCategory: Category = null;
@@ -36,6 +36,10 @@ export class EditCategoriesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.categoriesChangedSubscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.categories = this.categoryService.getCategories();
   }
 
   onSelectToEdit(category: Category) {

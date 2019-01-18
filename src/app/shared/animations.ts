@@ -46,3 +46,18 @@ export const listAnimation = trigger('listAnimation', [
   ])
 ]);
 
+export const listAnimation2 = trigger('listAnimation2', [
+  transition('* => *', [ // each time the binding value changes
+    query(':leave', [
+      stagger(300, [
+        animate('2s', style({ opacity: 0 }))
+      ])
+    ], { optional: true }),
+    query(':enter', [
+      style({ opacity: 0 }),
+      stagger(300, [
+        animate('2s', style({ opacity: 1 }))
+      ])
+    ], { optional: true })
+  ])
+]);
