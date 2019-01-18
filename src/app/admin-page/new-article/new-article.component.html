@@ -1,0 +1,114 @@
+<div class="container my-5" @fadeState *ngIf="!formSubmitted">
+
+  <div class="row justify-content-center">
+    <p id="admin-page-title">A new article</p>
+  </div>
+  <div class="row justify-content-center">
+    <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" [routerLink]="editMode ? '/admin/list' : '/admin'"></i>
+  </div>
+
+  <div class="row justify-content-center">
+    <form (ngSubmit)="onPreviewForm(f)" #f="ngForm">
+      <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title:</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            id="title"
+            [(ngModel)]="formTitle"
+            class="form-control"
+            name="title" required
+            [value]="editMode ? articleToEdit.title : ''">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label" required>Category:</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="category" [(ngModel)]="formCategory" name="category" required>
+            <option *ngFor="let category of categories">{{ category.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="!formSelectedFile" @fadeState>
+        <label for="imageUrl" class="col-sm-2 col-form-label">Image URL:</label>
+        <div class="col-sm-10 help">
+          <input type="tel" id="imageUrl" class="form-control" [(ngModel)]="formImageUrl" name="imageUrl" required>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="!formImageUrl" @fadeState>
+        <label class="col-sm-2 col-form-label" for="exampleFormControlFile1">Upload Image</label>
+        <div class="col-sm-4">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="changeFile($event)" ngModel name="image">
+        </div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-outline-secondary help" [ngbPopover]="imageHelp" triggers="mouseenter:mouseleave" popoverTitle="Info" placement="top">
+            <i class="fas fa-info-circle"></i>
+          </button>
+        </div>
+      </div>
+
+      <!--editor-->
+      <div class="editor bg-light">
+        <angular-editor [(ngModel)]="formEditor" [ngModelOptions]="{standalone: true}" [config]="editorConfig"></angular-editor>
+      </div>
+
+      <div class="row justify-content-center my-5">
+        <button class="btn btn-primary btn-outline-dark" type="submit" [disabled]="!f.form.valid">Preview</button>
+      </div>
+    </form>
+  </div>
+
+  <hr>
+
+
+  <div class="row justify-content-center mt-5 text-center">
+    <p>Optional: <br> you can set the display date and time of your new article</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <ngb-timepicker [(ngModel)]="formTime"></ngb-timepicker>
+  </div>
+
+  <div class="row justify-content-center" style="margin-bottom: 150px">
+    <div class="form-group row">
+      <div class="input-group">
+        <label for="date" class="col col-form-label my-auto">Display date:</label>
+        <div class="col-sm-10 my-auto">
+          <input id="date" class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="formDate" ngbDatepicker #d="ngbDatepicker">
+        </div>
+        <div class="col my-auto">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="container my-5" *ngIf="formSubmitted" @fadeState>
+  <div class="card-container">
+    <div class="card mb-3">
+      <img class="card-img-top" [src]="article.image" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"> {{ article.title }} </h5>
+        <p class="card-text" [innerHTML]="article.description | sanitizeHtml"> </p>
+        <p class="card-text"><small class="text-muted">
+          <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
+          <i class="fas fa-tags ml-4 mr-1"></i> <a (click)="onCategoryClicked(article.category)"> {{ formCategory }}</a></small></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="btn-group" role="group">
+      <button class="btn btn-outline-success" style="border-color: transparent" (click)="onSaveArticle()" [innerHTML]="editMode ? 'Edit' : 'Save and exit'"></button>
+      <button class="btn btn-outline-warning" style="border-color: transparent; color: black" (click)="formSubmitted = false">Back</button>
+    </div>
+  </div>
+
+</div>

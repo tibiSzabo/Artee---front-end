@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+img {
+  max-height: 450px;
+  object-fit: cover;
+  object-position: 50% 80%;
+}
+
+.card-container {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+}
+
+.back {
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 50ms ease-in;
+  display: inline-block;
+}
+
+.back:hover {
+  transform: scale(1.2);
+  transition: all 50ms;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+  cursor: pointer;
+}

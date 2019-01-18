@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+img {
+  max-height: 230px;
+  object-fit: cover;
+}
+
+@media (min-width: 1281px) {
+
+  img {
+    width: 950px;
+  }
+
+}
+
+.card-container {
+  margin: 15px 15px;
+}
+
+.card {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  cursor: pointer;
+
+  transform: scale(1);
+  transition: 300ms ease-in;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: 300ms ease-in;
+}
+
+li {
+  -webkit-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  -moz-box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  box-shadow: 18px 10px 40px -10px rgba(0,0,0,1);
+  transition: all 150ms ease-in;
+}
+
+li:hover {
+  transition: all 150ms ease-in;
+}
+
+.disabled>a.page-link {
+  font-weight: bolder;
+  opacity: 0.6;
+}
+
+a.page-link:hover {
+  transition: background-color 150ms ease-in;
+}
+
+a.page-link {
+  transition: background-color 150ms ease-in;
+}
+
+.no-search-result>p {
+  font-size: 1.5em;
+  font-family: Amaranth-regular, serif;
+}

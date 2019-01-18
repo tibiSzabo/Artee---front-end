@@ -1,0 +1,69 @@
+<div class="container my-5" >
+
+  <div class="row justify-content-center" *ngIf="!searchMode">
+    <nav aria-label="...">
+      <ul class="pagination pagination-lg">
+        <li class="page-item" routerLinkActive="disabled" [ngClass]="{'disabled': currentPage === page}" *ngFor="let page of pages">
+          <a class="page-link" (click)="onSelectPage(page)"
+             [tabindex]="currentPage === page ? -1 : 0"
+             [routerLink]="'/articles/' + page">{{ page }}</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div *ngIf="!searchMode">
+
+    <div class="row justify-content-center" [@listAnimation2]="articlesToDisplay.length">
+      <div class="card-container"
+           *ngFor="let article of articlesToDisplay"
+           (click)="onSelectArticle(article.id)">
+        <div class="card mb-3">
+          <img class="card-img-top" [src]="article.image" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> {{ article.title }} </h5>
+            <p class="card-text" [innerHTML]="(article.description.length>100) ? (article.description | slice:0:100)+'...':(article.description)"> </p>
+            <p class="card-text"><small class="text-muted">
+              <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
+              <i class="fas fa-tags ml-4 mr-1"></i> {{ article.category.name }} </small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <nav aria-label="...">
+        <ul class="pagination pagination-lg">
+          <li class="page-item" routerLinkActive="disabled" [ngClass]="{'disabled': currentPage === page}" *ngFor="let page of pages">
+            <a class="page-link" (click)="onSelectPage(page)"
+               [tabindex]="currentPage === page ? -1 : 0"
+               [routerLink]="'/articles/' + page">{{ page }}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="searchMode" [@listAnimation2]="articles.length">
+    <div class="card-container"
+         *ngFor="let article of articles | filter:filterBy:filterText"
+         (click)="onSelectArticle(article.id)">
+      <div class="card mb-3">
+        <img class="card-img-top" [src]="article.image" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"> {{ article.title }} </h5>
+          <p class="card-text" [innerHtml]="(article.description.length>100) ? (article.description | slice:0:100)+'...':(article.description)"> </p>
+          <p class="card-text"><small class="text-muted">
+            <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
+            <i class="fas fa-tags ml-4 mr-1"></i> {{ article.category.name }} </small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container"
+     style="min-height: 250px"
+     @fadeState
+     *ngIf="searchMode && (articles | filter:filterBy:filterText).length === 0">
+  <div class="no-search-result"> <p>No search result for: {{ filterText }}</p> </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row justify-content-center" @fadeState>
+    <p id="admin-page-title">Manage categories</p>
+  </div>
+  <div class="row justify-content-center" @fadeState>
+    <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" routerLink="/admin"></i>
+  </div>
+
+  <div class="list-group align-items-center" [@listAnimation] = "categories.length">
+    <li class="list-group-item text-center"
+        (click)="editMode = false"
+        id="addCategory"
+        data-toggle="modal"
+        data-target="#addCategoryModal"><i id="addIcon" class="fas fa-plus"></i></li>
+    <li class="list-group-item" *ngFor="let category of categories; let i = index">
+      <div class="li-left">
+        <i id="categoryIcon" class="fas fa-tags"></i>{{category.name}}
+      </div>
+      <div class="li-right">
+        <i id="editIcon"
+           class="fas fa-edit"
+           (click)="onSelectToEdit(category)"
+           data-toggle="modal"
+           data-target="#addCategoryModal"></i>
+        <i id="trashIcon"
+           class="fas fa-trash"
+           data-toggle="modal"
+           data-target="#confirmationModal"
+           (click)="onSelectToDelete(category)"></i>
+      </div>
+    </li>
+  </div>
+
+</div>
+
+<!--Modal - confirmation-->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true" *ngIf="selectedCategory != null">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title">Delete Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Are you sure you want to delete <span class="text-primary">"{{ selectedCategory.name }}"</span> ?</strong></p>
+        <p>All information associated to this category will be permanently deleted.
+          <span class="text-danger">This operation can not be undone.</span>
+      </div>
+      <div class="modal-footer bg-dark">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteCategory()" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal - add category-->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-hidden="true" #addCategoryModal>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title" [innerHTML]="editMode ? 'Edit category' : 'Add new category:'"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm">
+          <div class="form-group my-5">
+            <input type="text"
+                   name="title"
+                   placeholder="Title"
+                   class="form-control my-2"
+                   [(ngModel)]="newCategoryTitle"
+                   required
+                   [value]="editMode ? selectedCategory.name : ''">
+            <input type="url"
+                   name="image"
+                   placeholder="Image URL"
+                   class="form-control my-2"
+                   [(ngModel)]="newCategoryImageUrl"
+                   required
+                   [value]="editMode ? selectedCategory.image : ''">
+          </div>
+        </form>
+
+        <img *ngIf="newCategoryImageUrl !== '' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
+        <img *ngIf="editMode" [src]="selectedCategory.image" alt="Category Image" @fadeState>
+      </div>
+      <div class="modal-footer bg-dark">
+        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="dismissData()">Cancel</button>
+        <button *ngIf="!editMode" type="button" class="btn btn-success" (click)="onSaveCategory()" [disabled]="!f.form.valid" data-dismiss="modal">Add</button>
+        <button *ngIf="editMode" type="button" class="btn btn-success" (click)="onEditCategory()" data-dismiss="modal">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
