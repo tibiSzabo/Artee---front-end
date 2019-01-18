@@ -72,7 +72,7 @@
     <ngb-timepicker [(ngModel)]="formTime"></ngb-timepicker>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="margin-bottom: 150px">
     <div class="form-group row">
       <div class="input-group">
         <label for="date" class="col col-form-label my-auto">Display date:</label>
@@ -96,7 +96,7 @@
       <img class="card-img-top" [src]="article.image" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title"> {{ article.title }} </h5>
-        <p class="card-text" [innerHTML]="article.description"> </p>
+        <p class="card-text" [innerHTML]="article.description | sanitizeHtml"> </p>
         <p class="card-text"><small class="text-muted">
           <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
           <i class="fas fa-tags ml-4 mr-1"></i> <a (click)="onCategoryClicked(article.category)"> {{ formCategory }}</a></small></p>
@@ -104,7 +104,7 @@
     </div>
   </div>
 
-  <div class="row justify-content-center my-3">
+  <div class="row justify-content-center">
     <div class="btn-group" role="group">
       <button class="btn btn-outline-success" style="border-color: transparent" (click)="onSaveArticle()" [innerHTML]="editMode ? 'Edit' : 'Save and exit'"></button>
       <button class="btn btn-outline-warning" style="border-color: transparent; color: black" (click)="formSubmitted = false">Back</button>

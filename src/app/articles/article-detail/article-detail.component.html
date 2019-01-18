@@ -4,7 +4,7 @@
       <img class="card-img-top" [src]="article.image" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title"> {{ article.title }} </h5>
-        <p class="card-text" [innerHTML]="article.description"> </p>
+        <p class="card-text" [innerHTML]="article.description | sanitizeHtml"> </p>
         <p class="card-text"><small class="text-muted">
           <i class="fas fa-calendar-alt mr-1"></i> {{ article.date | date }}
           <i class="fas fa-tags ml-4 mr-1"></i> <a (click)="onCategoryClicked(article.category)">{{ article.category.name }}</a></small></p>

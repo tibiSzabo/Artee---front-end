@@ -22,6 +22,7 @@ import { ListArticlesComponent } from './admin-page/list-articles/list-articles.
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditCategoriesComponent } from './admin-page/edit-categories/edit-categories.component';
 import { CategoryService } from './shared/category.service';
+import { SanitizeHtmlPipe } from './shared/sanitize-html-pipe.pipe';
 
 export function articleProviderFactory(provider: ArticleService) {
   return () => provider.init();
@@ -44,7 +45,8 @@ export function categoryProviderFactory(provider: CategoryService) {
     AdminPageComponent,
     NewArticleComponent,
     ListArticlesComponent,
-    EditCategoriesComponent
+    EditCategoriesComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     BrowserModule,

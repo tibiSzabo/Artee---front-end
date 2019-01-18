@@ -1,9 +1,8 @@
-<div class="container" @fadeState>
-
-  <div class="row justify-content-center">
+<div class="container">
+  <div class="row justify-content-center" @fadeState>
     <p id="admin-page-title">Manage categories</p>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" @fadeState>
     <i class="fas fa-arrow-left mb-5" id="back-icon" placement="top" ngbTooltip="Back" routerLink="/admin"></i>
   </div>
 
@@ -87,7 +86,7 @@
           </div>
         </form>
 
-        <img *ngIf="newCategoryImageUrl !== ' ' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
+        <img *ngIf="newCategoryImageUrl !== '' && !editMode" [src]="newCategoryImageUrl" alt="Category Image" @fadeState>
         <img *ngIf="editMode" [src]="selectedCategory.image" alt="Category Image" @fadeState>
       </div>
       <div class="modal-footer bg-dark">

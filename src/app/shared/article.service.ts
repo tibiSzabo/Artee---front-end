@@ -12,6 +12,7 @@ export class ArticleService {
   private articles: Article [] = [];
 
   articlesChanged = new Subject<Article []>();
+  articlesLoaded = new Subject();
 
   constructor(private categoryService: CategoryService,
               private backendService: BackendService) {
@@ -67,7 +68,8 @@ export class ArticleService {
           this.articles.push(article);
         }
         this.articlesChanged.next(this.articles.slice());
-        console.log(articles);
+        this.articlesLoaded.next();
+        // console.log(articles);
       }
     );
 

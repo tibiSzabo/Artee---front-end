@@ -44,7 +44,7 @@
 
 
 #back-icon {
-  font-size: 35px;
+  font-size: 30px;
   cursor: pointer;
   color: #343a40;
   text-shadow: 0px 2px 7px black;
@@ -62,4 +62,13 @@
   font-family: Pecita, serif;
   font-size: 45px;
   text-shadow: 0px 2px 7px black;
+  text-align: center;
+}
+
+.alert {
+  position: sticky;
+  z-index: 1050;
+  width: 100%;
+  left: 0;
+  top: 75px;
 }

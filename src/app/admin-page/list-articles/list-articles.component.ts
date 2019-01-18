@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { ArticleService } from '../../shared/article.service';
 import { Article } from '../../articles/article.model';
-import { fadeTrigger, listItemRemoved } from '../../shared/animations';
+import { fadeTrigger, listAnimation, listAnimation2, listItemRemoved } from '../../shared/animations';
 import { Router } from '@angular/router';
 import { BackendService } from '../../shared/backend.service';
 
@@ -11,7 +11,7 @@ import { BackendService } from '../../shared/backend.service';
   selector: 'app-list-articles',
   templateUrl: './list-articles.component.html',
   styleUrls: ['./list-articles.component.css'],
-  animations: [listItemRemoved, fadeTrigger]
+  animations: [listItemRemoved, fadeTrigger, listAnimation2, listAnimation]
 })
 export class ListArticlesComponent implements OnInit, OnDestroy {
   articles: Article [];

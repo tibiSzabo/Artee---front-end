@@ -6,14 +6,14 @@ import { ArticleService } from '../../shared/article.service';
 import { Article } from '../article.model';
 import { ScrollService } from '../../shared/scroll.service';
 import { routeFadeStateTrigger } from '../../shared/route-animations';
-import { fadeTrigger } from '../../shared/animations';
+import { fadeTrigger, listAnimation, listAnimation2 } from '../../shared/animations';
 import { CategoryService } from '../../shared/category.service';
 
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
-  animations: [routeFadeStateTrigger, fadeTrigger]
+  animations: [routeFadeStateTrigger, fadeTrigger, listAnimation, listAnimation2]
 })
 export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -26,6 +26,7 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
   filterBy = 'title';
   searchMode = false;
   articlesChangedSubscription: Subscription;
+  articlesLoaded = false;
 
   constructor(private articleService: ArticleService,
               private categoryService: CategoryService,
@@ -53,8 +54,10 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.articlesChangedSubscription = this.articleService.articlesChanged.subscribe(
       (articles: Article[]) => {
         this.initArticles();
+        this.pages = this.getPages();
       }
     );
+
   }
 
   ngAfterViewInit(): void {
@@ -96,7 +99,6 @@ export class ArticleListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.articles = this.articleService.getArticles();
     this.currentPage = this.route.snapshot.params['id'] ? +this.route.snapshot.params['id'] : 1;
     this.articlesToDisplay = this.articles.slice((this.currentPage - 1) * 10, this.currentPage * 10);
-
   }
 
 }
